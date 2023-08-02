@@ -108,18 +108,19 @@ namespace SelfHost.Startup
                 endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
-
-            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+           
             app.UseSwaggerUI(options =>
             {
+
+                var resource = this.GetType().Assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains("wwwroot.swagger"));
                 // specifying the Swagger JSON endpoint.
                 options.SwaggerEndpoint($"/swagger/{_apiVersion}/swagger.json", $"DNBU API {_apiVersion}");
                 options.IndexStream = () => Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("Identity.Web.Host.wwwroot.swagger.ui.index.html");
+                    .GetManifestResourceStream(resource);
                 options.DisplayRequestDuration(); // Controls the display of the request duration (in milliseconds) for "Try it out" requests.  
-            }); // URL: /swagger
+            });
+            //MDM.Identity.Self-host
         }
 
         private void ConfigureSwagger(IServiceCollection services)
@@ -131,19 +132,19 @@ namespace SelfHost.Startup
                     Version = _apiVersion,
                     Title = "Configure an App Service app API",
                     Description = "Configure an App Service app",
-                    // uncomment if needed TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
                         Name = "Configure an App Service app",
                         Email = string.Empty,
-                        Url = new Uri("https://github.com/raidengates/casa_solution"),
+                        Url = new Uri("https://github.com/dudangphuoc/mdm-platform-erp"),
                     },
                     License = new OpenApiLicense
                     {
                         Name = "MIT License",
-                        Url = new Uri("https://github.com/raidengates/casa_solution/blob/master/LICENSE.txt"),
+                       
                     }
                 });
+
                 options.DocInclusionPredicate((docName, description) => true);
 
                 // Define the BearerAuth scheme that's in use
@@ -158,18 +159,20 @@ namespace SelfHost.Startup
 
                 //add summaries to swagger
                 bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
-                if (canShowSummaries)
-                {
-                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
-                    options.IncludeXmlComments(hostXmlPath);
-                    var applicationXml = $"Identity.Application.xml";
-                    var applicationXmlPath = Path.Combine(AppContext.BaseDirectory, applicationXml);
-                    options.IncludeXmlComments(applicationXmlPath);
-                    var webCoreXmlFile = $"Identity.Web.Core.xml";
-                    var webCoreXmlPath = Path.Combine(AppContext.BaseDirectory, webCoreXmlFile);
-                    options.IncludeXmlComments(webCoreXmlPath);
-                }
+                
+                //// Set the comments path for the Swagger JSON and UI.
+                //if (canShowSummaries)
+                //{
+                //    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
+                //    options.IncludeXmlComments(hostXmlPath);
+                //    var applicationXml = $"Identity.Application.xml";
+                //    var applicationXmlPath = Path.Combine(AppContext.BaseDirectory, applicationXml);
+                //    options.IncludeXmlComments(applicationXmlPath);
+                //    var webCoreXmlFile = $"Identity.Web.Core.xml";
+                //    var webCoreXmlPath = Path.Combine(AppContext.BaseDirectory, webCoreXmlFile);
+                //    options.IncludeXmlComments(webCoreXmlPath);
+                //}
             });
         }
     }

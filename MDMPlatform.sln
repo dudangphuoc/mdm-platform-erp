@@ -40,7 +40,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.Identity.Migrator", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.Identity.EntityFrameworkCore", "src\services\mdm-identity-service\MDM.Identity.EntityFrameworkCore\MDM.Identity.EntityFrameworkCore.csproj", "{6BDA7F1B-C46F-4530-BC1A-99172C7243D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.Identity.Self-host", "src\services\mdm-identity-service\MDM.Identity.Self-host\MDM.Identity.Self-host.csproj", "{25E36927-2AF4-4643-ABF9-E443593D31B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.Identity.Host", "src\services\mdm-identity-service\MDM.Identity.Self-host\MDM.Identity.Host.csproj", "{25E36927-2AF4-4643-ABF9-E443593D31B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDMPlatform.EntityFrameworkCore", "src\core\MDMPlatform.EntityFrameworkCore\MDMPlatform.EntityFrameworkCore.csproj", "{BDCCBACC-562B-46D1-B85B-985656BF5ACE}"
 EndProject

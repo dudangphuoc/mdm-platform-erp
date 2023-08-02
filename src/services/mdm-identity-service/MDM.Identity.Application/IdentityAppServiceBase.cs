@@ -1,16 +1,10 @@
 ﻿using Abp.Application.Services;
 using Abp.IdentityFramework;
-using Abp.Localization;
 using Abp.Runtime.Session;
 using AuthorizationModule.Authorization.Users;
 using AuthorizationModule.MultiTenancy;
 using MDM.Shared.AuthorizationModule;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Identity.Application
 {
@@ -27,6 +21,8 @@ namespace Identity.Application
 
         protected virtual async Task<User> GetCurrentUserAsync()
         {
+
+
             var user = await UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
             if (user == null)
             {

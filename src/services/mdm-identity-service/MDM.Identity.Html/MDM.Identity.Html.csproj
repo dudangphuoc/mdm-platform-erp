@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<RootNamespace>$(MSBuildProjectName.Replace("MDM.", ""))</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\MDMPlatform.Web.Core\MDMPlatform.Web.Core.csproj" />
+    <ProjectReference Include="..\MDM.Identity.Application\MDM.Identity.Application.csproj" />
+    <ProjectReference Include="..\MDM.Identity.EntityFrameworkCore\MDM.Identity.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>$(MSBuildProjectName.Replace("MDM.", ""))</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\core\MDMPlatform.Core\MDMPlatform.Core.csproj" />
+	  <ProjectReference Include="..\..\..\modules\MDM.AuthorizationModule\MDM.AuthorizationModule.csproj" />
+	</ItemGroup>
+
+</Project>

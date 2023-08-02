@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>539a6b44-9c1c-436d-a09c-14692cddbfac</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\CreateRoleDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\FlatPermissionDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\GetRoleForEditOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\GetRolesInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\PagedRoleResultRequestDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\PermissionDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\RoleDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\RoleEditDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\RoleListDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\Roles\RoleMapProfile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\ApplicationDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\AppSettingDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\CreateApplicationDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\CreateAppSettingDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\CreateEnvironmentDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\EnvironmentDto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataTransferObject\EnvironmentModule\PagedResultRequestDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)DataTransferObject\AuthorizationModule\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ebdeca8c-8451-481a-9ff7-ed9166fd2fa9</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MDM.Shared.Consts</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AuthorizationModule\GlobalConsts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DebugHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\AuthorizationLocalizationConfigurer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-es.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-fa.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-fr.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-it.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-ja.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-lt.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-nl.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-pt-BR.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-tr.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule-zh-Hans.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\SourceFiles\AuthorizationModule.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Localization\AuthorizationModule\" />
+  </ItemGroup>
+</Project>

@@ -113,7 +113,7 @@ namespace SelfHost.Startup
             app.UseSwaggerUI(options =>
             {
 
-                var resource = this.GetType().Assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains("wwwroot.swagger"));
+                var resource = this.GetType().Assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains("wwwroot.swagger.ui.index.html"));
                 // specifying the Swagger JSON endpoint.
                 options.SwaggerEndpoint($"/swagger/{_apiVersion}/swagger.json", $"DNBU API {_apiVersion}");
                 options.IndexStream = () => Assembly.GetExecutingAssembly()
@@ -159,7 +159,21 @@ namespace SelfHost.Startup
 
                 //add summaries to swagger
                 bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
-                
+                if (canShowSummaries)
+                {
+                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
+
+
+                    //new List<XDocument>
+                    //{
+
+                    //    XDocument.Load(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")),
+                    //    XDocument.Load(Path.Combine(AppContext.BaseDirectory, $"Identity.Application.xml")),
+                    //    XDocument.Load(Path.Combine(AppContext.BaseDirectory, $"Identity.Web.Core.xml"))
+                    //};
+                }
+
                 //// Set the comments path for the Swagger JSON and UI.
                 //if (canShowSummaries)
                 //{

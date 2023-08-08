@@ -30,7 +30,6 @@ namespace MDM.AuthorizationModule
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(typeof(AuthorizationModule).GetAssembly());
-
         }
     }
 }

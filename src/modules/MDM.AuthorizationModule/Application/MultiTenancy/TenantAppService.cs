@@ -7,17 +7,12 @@ using Abp.IdentityFramework;
 using Abp.Linq.Extensions;
 using Abp.MultiTenancy;
 using Abp.Runtime.Security;
-
-using AuthorizationModule.DataTransferObject.MultiTenancy;
-
 using AuthorizationModule.Authorization;
 using AuthorizationModule.Authorization.Roles;
 using AuthorizationModule.Authorization.Users;
+using AuthorizationModule.DataTransferObject.MultiTenancy;
 using AuthorizationModule.Editions;
-using AuthorizationModule.MultiTenancy;
 using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AuthorizationModule.MultiTenancy
 {

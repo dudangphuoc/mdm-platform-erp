@@ -1,4 +1,5 @@
-﻿using MDM.ModuleBase;
+﻿using MDM.CatalogModule.Product;
+using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Price
@@ -17,6 +18,10 @@ namespace MDM.CatalogModule.Price
         public int Priority { get; set; }
 
         public bool IsActive { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
 
         public ICollection<Price>? Prices { get; set; }
 

@@ -11,10 +11,10 @@ public class Price : MDMFullAuditedEntityBase
 
     public Guid PriceListId { get; set; }
 
+    public Guid ProductId { get; set; }
+
     [ForeignKey(nameof(ProductId))]
     public ProductEntity Product { get; set; }
-
-    public Guid ProductId { get; set; }
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal BasePrice { get; set; }
@@ -22,11 +22,9 @@ public class Price : MDMFullAuditedEntityBase
     [Column(TypeName = "decimal(18,2)")]
     public decimal? SalePrice { get; set; }
 
-    public int MinQuantity { get; set; }
+    public float MinQuantity { get; set; }
 
-    public DateTime? StartDate { get; set; }
-
-    public DateTime? EndDate { get; set; }
+    
 
     [Column(TypeName = "nvarchar(4000)")]
     public string? Description { get; set; }

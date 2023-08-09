@@ -1,5 +1,4 @@
-﻿using MDM.CatalogModule.Price;
-using MDM.ModuleBase;
+﻿using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 using PriceEntity = MDM.CatalogModule.Price.Price;
 namespace MDM.CatalogModule.Product;
@@ -9,6 +8,7 @@ public class Product : MDMFullAuditedEntityBase
 {
     [ForeignKey(nameof(BrandId))]
     public Brand? Brand { get; set; }
+
     public Guid? BrandId { get; set; }
 
     [ForeignKey(nameof(ProductUnitId))]
@@ -51,12 +51,6 @@ public class Product : MDMFullAuditedEntityBase
     [Column(TypeName = "varchar(100)")]
     public string? Gtin { get; set; }
 
-    public decimal Price { get; set; }
-
-    public decimal? SalePrice { get; set; }
-
-    public EProductType? ProductType { get; set; } = EProductType.Simple;
-
     [Column(TypeName = "nvarchar(4000)")]
     public string? Thumbnail { get; set; }
 
@@ -69,7 +63,6 @@ public class Product : MDMFullAuditedEntityBase
     public ICollection<ProductMedia>? ProductMedias { get; set; }
 
     public ICollection<PriceEntity>? ProductPrices { get; set; }
-    //public ProductFeature ProductFeature { get; set; }
-    //public ICollection<ProductVariant>? ProductVariants { get; set; }
 
+    public ICollection<ProductBundle> ProductBundles { get; set; }
 }

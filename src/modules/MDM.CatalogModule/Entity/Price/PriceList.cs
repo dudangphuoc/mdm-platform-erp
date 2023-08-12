@@ -2,7 +2,7 @@
 using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MDM.CatalogModule.Price
+namespace MDM.CatalogModule.Entity.Price
 {
     [Table("PriceLists")]
     public class PriceList : MDMFullAuditedEntityBase

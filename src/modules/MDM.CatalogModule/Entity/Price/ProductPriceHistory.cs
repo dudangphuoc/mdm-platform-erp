@@ -1,8 +1,8 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations.Schema;
-using ProductEntity = MDM.CatalogModule.Product.Product;
+using ProductEntity = MDM.CatalogModule.Entity.Product.ProductBase;
 
-namespace MDM.CatalogModule.Price;
+namespace MDM.CatalogModule.Entity.Price;
 
 public class ProductPriceHistory : CreationAuditedEntity<Guid>
 {

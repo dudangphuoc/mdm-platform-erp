@@ -1,18 +1,13 @@
 ﻿using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
-using PriceEntity = MDM.CatalogModule.Price.Price;
-namespace MDM.CatalogModule.Product;
+using PriceEntity = MDM.CatalogModule.Entity.Price.Price;
+namespace MDM.CatalogModule.Entity.Product;
 
-[Table(nameof(Product))]
-public class Product : MDMFullAuditedEntityBase
+[Table(nameof(ProductBase))]
+public class ProductBase : MDMFullAuditedEntityBase
 {
-    [ForeignKey(nameof(BrandId))]
-    public Brand? Brand { get; set; }
-
     public Guid? BrandId { get; set; }
 
-    [ForeignKey(nameof(ProductUnitId))]
-    public ProductUnit? ProductUnit { get; set; }
     public Guid? ProductUnitId { get; set; }
 
     [Column(TypeName = "nvarchar(500)")]
@@ -59,6 +54,12 @@ public class Product : MDMFullAuditedEntityBase
     public DateTime? MarkAsNewStartDate { get; set; }
 
     public DateTime? MarkAsNewEndDate { get; set; }
+
+    [ForeignKey(nameof(BrandId))]
+    public Brand? Brand { get; set; }
+
+    [ForeignKey(nameof(ProductUnitId))]
+    public ProductUnit? ProductUnit { get; set; }
 
     public ICollection<ProductMedia>? ProductMedias { get; set; }
 

@@ -7,7 +7,7 @@ public class TagRelated : Entity<Guid>
 {
     public Guid TagId { get; set; }
 
-    public Type EntityType { get; set; }
+    public string EntityName { get; set; }
 
     public Guid EntityId { get; set; }
 

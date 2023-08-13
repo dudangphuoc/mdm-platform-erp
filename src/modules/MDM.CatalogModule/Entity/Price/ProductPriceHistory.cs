@@ -1,9 +1,12 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using MDM.Common.EntityFactory;
 using System.ComponentModel.DataAnnotations.Schema;
 using ProductEntity = MDM.CatalogModule.Entity.Product.ProductBase;
 
 namespace MDM.CatalogModule.Entity.Price;
 
+[InjectContext]
+[Table("ProductPriceHistory")]
 public class ProductPriceHistory : CreationAuditedEntity<Guid>
 {
     [ForeignKey(nameof(ProductId))]

@@ -54,7 +54,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.CatalogModule", "src\mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.ModuleBase", "src\modules\MDM.ModuleBase\MDM.ModuleBase.csproj", "{5BAA0ED8-5FA7-4581-8684-AE9F2A2E146F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDM.CommonModule", "src\modules\MDM.CommonModule\MDM.CommonModule.csproj", "{A2639917-15E1-4B55-9B19-AB6A14AE65DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDM.CommonModule", "src\modules\MDM.CommonModule\MDM.CommonModule.csproj", "{A2639917-15E1-4B55-9B19-AB6A14AE65DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDM.CustomerModule", "MDM.CustomerModule\MDM.CustomerModule.csproj", "{A3E73AAC-CE3D-4C5B-B04D-CABC355CD322}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +132,10 @@ Global
 		{A2639917-15E1-4B55-9B19-AB6A14AE65DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2639917-15E1-4B55-9B19-AB6A14AE65DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2639917-15E1-4B55-9B19-AB6A14AE65DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E73AAC-CE3D-4C5B-B04D-CABC355CD322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E73AAC-CE3D-4C5B-B04D-CABC355CD322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E73AAC-CE3D-4C5B-B04D-CABC355CD322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E73AAC-CE3D-4C5B-B04D-CABC355CD322}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +164,7 @@ Global
 		{2FDCAE32-9180-4FEA-A848-6C45E539858B} = {2B780CA2-2755-443E-BD94-ED52F24D2F7B}
 		{5BAA0ED8-5FA7-4581-8684-AE9F2A2E146F} = {2B780CA2-2755-443E-BD94-ED52F24D2F7B}
 		{A2639917-15E1-4B55-9B19-AB6A14AE65DF} = {2B780CA2-2755-443E-BD94-ED52F24D2F7B}
+		{A3E73AAC-CE3D-4C5B-B04D-CABC355CD322} = {2B780CA2-2755-443E-BD94-ED52F24D2F7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A55C749-0BFF-4EFD-8499-12A2CB3B5B07}

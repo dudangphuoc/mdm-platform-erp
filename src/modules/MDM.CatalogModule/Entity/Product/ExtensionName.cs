@@ -1,9 +1,11 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using MDM.Common.EntityFactory;
 using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Product;
 
+[InjectContext]
 [Table(nameof(ExtensionName))]
 public class ExtensionName : CreationAuditedEntity<Guid>
 {

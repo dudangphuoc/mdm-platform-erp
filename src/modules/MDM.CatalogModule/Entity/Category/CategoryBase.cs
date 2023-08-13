@@ -1,9 +1,12 @@
 ﻿using Abp.Domain.Entities;
+using MDM.Common.EntityFactory;
 using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Category;
 
+[InjectContext]
+[Table("Category")]
 public class CategoryBase : MDMFullAuditedEntityBase, IPassivable
 {
     [Column(TypeName = "nvarchar(256)")]

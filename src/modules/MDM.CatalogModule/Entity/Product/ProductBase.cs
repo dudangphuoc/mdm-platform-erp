@@ -1,8 +1,10 @@
-﻿using MDM.ModuleBase;
+﻿using MDM.Common.EntityFactory;
+using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 using PriceEntity = MDM.CatalogModule.Entity.Price.Price;
 namespace MDM.CatalogModule.Entity.Product;
 
+[InjectContext]
 [Table(nameof(ProductBase))]
 public class ProductBase : MDMFullAuditedEntityBase
 {

@@ -4,7 +4,7 @@ using MDM.ModuleBase;
 
 namespace MDM.CommonModule
 {
-    [DependsOn()]
+    [DependsOn(typeof(MDMModuleBase))]
     public class CommonModule : AbpModule
     {
         public override void Initialize()

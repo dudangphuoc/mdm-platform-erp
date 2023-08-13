@@ -1,8 +1,10 @@
-﻿using MDM.ModuleBase;
+﻿using MDM.Common.EntityFactory;
+using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Product
 {
+    [InjectContext]
     [Table(nameof(ProductMedia))]
     public class ProductMedia : MDMFullAuditedEntityBase
     {

@@ -1,8 +1,10 @@
-﻿using MDM.ModuleBase;
+﻿using MDM.Common.EntityFactory;
+using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Price;
 
+[InjectContext]
 [Table("Price")]
 public class Price : MDMFullAuditedEntityBase
 {
@@ -23,7 +25,7 @@ public class Price : MDMFullAuditedEntityBase
     [Column(TypeName = "nvarchar(4000)")]
     public string? Description { get; set; }
 
-    public EComputePrice? ComputePrice { get; set; } = EComputePrice.Fixed;
+    public EComputePrice? ComputePrice { get; set; } = ModuleBase.EComputePrice.Fixed;
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal? Percent { get; set; }

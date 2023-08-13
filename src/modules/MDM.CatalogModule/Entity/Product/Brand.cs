@@ -1,10 +1,12 @@
 ﻿using Abp.Domain.Entities;
+using MDM.Common.EntityFactory;
 using MDM.ModuleBase;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Product;
 
+[InjectContext]
 [Table("Brands")]
 public class Brand : MDMFullAuditedEntityBase, IPassivable
 {

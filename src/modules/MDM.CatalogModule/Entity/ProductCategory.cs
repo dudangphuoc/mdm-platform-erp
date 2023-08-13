@@ -1,11 +1,12 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using MDM.CatalogModule.Entity.Category;
 using MDM.CatalogModule.Entity.Product;
+using MDM.Common.EntityFactory;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity;
 
-
+[InjectContext]
 [Table("ProductCategories")]
 public class ProductCategory : CreationAuditedEntity<Guid>
 {

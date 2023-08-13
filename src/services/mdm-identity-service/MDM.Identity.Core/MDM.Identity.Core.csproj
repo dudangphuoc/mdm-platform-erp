@@ -8,8 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\MDM.CustomerModule\MDM.CustomerModule.csproj" />
 	  <ProjectReference Include="..\..\..\core\MDMPlatform.Core\MDMPlatform.Core.csproj" />
 	  <ProjectReference Include="..\..\..\modules\MDM.AuthorizationModule\MDM.AuthorizationModule.csproj" />
+	  <ProjectReference Include="..\..\..\modules\MDM.CatalogModule\MDM.CatalogModule.csproj" />
+	  <ProjectReference Include="..\..\..\modules\MDM.CommonModule\MDM.CommonModule.csproj" />
 	</ItemGroup>
 
 </Project>

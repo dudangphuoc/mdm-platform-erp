@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MDM.PaymentModule.Entities;
 
 
-public class ReceiptItemBase<TOrder> : MDMFullAuditedEntityBase
+public class ReceiptItemBase<TReference> : MDMFullAuditedEntityBase
 {
     public Guid ReceiptId { get; set; }
 
@@ -13,5 +13,5 @@ public class ReceiptItemBase<TOrder> : MDMFullAuditedEntityBase
     [DataType("decimal(18,2)")]
     public decimal TotalAmount { get; set; }
 
-    public InvoiceBase<TOrder> Invoice { get; set; }
+    public InvoiceBase<TReference> Invoice { get; set; }
 }

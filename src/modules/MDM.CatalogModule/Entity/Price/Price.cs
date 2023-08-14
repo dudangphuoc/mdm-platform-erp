@@ -17,8 +17,7 @@ public class Price : MDMFullAuditedEntityBase
     [Column(TypeName = "decimal(18,2)")]
     public decimal BasePrice { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")]
-    public decimal? SalePrice { get; set; }
+    public bool IsPrimary { get; set; }
 
     public float MinQuantity { get; set; }
 

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MDM.PaymentModule.Entities;
 
 [Table("Payment")]
-public abstract class PaymentBase<TOrder, TParty, TPaymentMethod> : MDMFullAuditedEntityBase
+public abstract class PaymentBase<TReference, TParty, TPaymentMethod> : MDMFullAuditedEntityBase
 {
     public Guid ReceiptId { get; set; }
 
@@ -19,7 +19,7 @@ public abstract class PaymentBase<TOrder, TParty, TPaymentMethod> : MDMFullAudit
 
     public EPaymentStatus PaymentStatus { get; set; }
 
-    public TOrder Order { get; set; }
+    public TReference Order { get; set; }
 
     public TParty Party { get; set; }
 

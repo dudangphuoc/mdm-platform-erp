@@ -1,12 +1,12 @@
-﻿using MDM.Common.EntityFactory;
-using MDM.ModuleBase;
+﻿using Abp.Domain.Entities.Auditing;
+using MDM.Common.EntityFactory;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Product;
 
 [InjectContext]
 [Table("ProductBundleColections")]
-public class ProductBundleColection : MDMFullAuditedEntityBase
+public class ProductBundleColection : CreationAuditedEntity<Guid>
 {
     public Guid ProductRelated { get; set; }
 
@@ -17,4 +17,8 @@ public class ProductBundleColection : MDMFullAuditedEntityBase
 
     [ForeignKey(nameof(ProductRelated))]
     public ProductBase Product { get; set; }
+
+    public ICollection<ProductBundleVariant> ProductBundleVariants { get; set; }
 }
+
+

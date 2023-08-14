@@ -4,6 +4,7 @@ using AuthorizationModule.Authorization.Roles;
 using AuthorizationModule.Authorization.Users;
 using AuthorizationModule.MultiTenancy;
 using MDM.CatalogModule;
+using MDM.CatalogModule.Entity.Product;
 using MDM.Common.EntityFactory;
 using MDM.CustomerModule;
 using MDM.CustomerModule.Entity.CustomerModel;
@@ -76,6 +77,16 @@ namespace Identity.EntityFrameworkCore
             {
                 p.HasIndex(s => s.TeamName);
                 p.HasOne(p => p.Team).WithOne().HasForeignKey<TeamHistory>(p => p.TeamId).OnDelete(DeleteBehavior.NoAction);
+            });
+
+            builder.Entity<ProductBundleColection>(p =>
+            {
+                p.HasMany(p => p.ProductBundleVariants).WithOne(x => x.ProductBundleColection).HasForeignKey(p => p.ProductBundleColectionId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            builder.Entity<ProductBundleVariant>(p =>
+            {
+                p.HasOne(p => p.ProductBundleColection).WithMany(x => x.ProductBundleVariants).HasForeignKey(p => p.ProductBundleColectionId).OnDelete(DeleteBehavior.NoAction);
             });
         }
 

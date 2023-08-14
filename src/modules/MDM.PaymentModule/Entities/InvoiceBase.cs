@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.PaymentModule.Entities;
 
-public class InvoiceBase<TOrder> : MDMFullAuditedEntityBase
+public class InvoiceBase<TReference> : MDMFullAuditedEntityBase
 {
     public Guid? OrderId { get; set; }
 
@@ -21,7 +21,7 @@ public class InvoiceBase<TOrder> : MDMFullAuditedEntityBase
     [Column(TypeName = "nvarchar(1000)")]
     public string Note { get; set; }
 
-    public TOrder Order { get; set; }
+    public TReference Order { get; set; }
 
-    public ICollection<ReceiptItemBase<TOrder>> ReceiptItems { get; set; }
+    public ICollection<ReceiptItemBase<TReference>> ReceiptItems { get; set; }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20230813053024_init-project")]
-    partial class initproject
+    [Migration("20230814093850_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1768,6 +1768,9 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2");
 
@@ -1783,20 +1786,12 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Property<Guid>("PriceListId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ProductBaseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("SalePrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int?>("TenantId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PriceListId");
-
-                    b.HasIndex("ProductBaseId");
 
                     b.ToTable("Price");
                 });
@@ -2253,29 +2248,11 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Property<long?>("CreatorUserId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
                     b.Property<Guid>("ProductBundleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductRelated")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -2284,6 +2261,33 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductRelated");
 
                     b.ToTable("ProductBundleColections");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleVariant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("ProductBundleColectionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductVariantRelated")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductBundleColectionId");
+
+                    b.HasIndex("ProductVariantRelated");
+
+                    b.ToTable("ProductBundleVariants");
                 });
 
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMedia", b =>
@@ -3860,10 +3864,6 @@ namespace Identity.EntityFrameworkCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductBase", null)
-                        .WithMany("ProductPrices")
-                        .HasForeignKey("ProductBaseId");
-
                     b.Navigation("PriceList");
                 });
 
@@ -3950,6 +3950,25 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("ProductBundle");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleVariant", b =>
+                {
+                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductBundleColection", "ProductBundleColection")
+                        .WithMany("ProductBundleVariants")
+                        .HasForeignKey("ProductBundleColectionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductVariant", "ProductVariant")
+                        .WithMany()
+                        .HasForeignKey("ProductVariantRelated")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductBundleColection");
+
+                    b.Navigation("ProductVariant");
                 });
 
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMedia", b =>
@@ -4403,13 +4422,16 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("ProductBundles");
 
                     b.Navigation("ProductMedias");
-
-                    b.Navigation("ProductPrices");
                 });
 
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundle", b =>
                 {
                     b.Navigation("BundleColection");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColection", b =>
+                {
+                    b.Navigation("ProductBundleVariants");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.CustomerModel.CustomerBase", b =>

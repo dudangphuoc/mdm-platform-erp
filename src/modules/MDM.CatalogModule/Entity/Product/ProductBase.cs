@@ -1,7 +1,6 @@
 ﻿using MDM.Common.EntityFactory;
 using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
-using PriceEntity = MDM.CatalogModule.Entity.Price.Price;
 namespace MDM.CatalogModule.Entity.Product;
 
 [InjectContext]
@@ -64,8 +63,6 @@ public class ProductBase : MDMFullAuditedEntityBase
     public ProductUnit? ProductUnit { get; set; }
 
     public ICollection<ProductMedia>? ProductMedias { get; set; }
-
-    public ICollection<PriceEntity>? ProductPrices { get; set; }
 
     public ICollection<ProductBundle> ProductBundles { get; set; }
 }

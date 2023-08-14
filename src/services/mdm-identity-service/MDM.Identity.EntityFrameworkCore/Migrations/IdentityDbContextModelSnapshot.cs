@@ -2215,10 +2215,13 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<Guid?>("ProductBaseId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProductBundleType")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("ProductRelated")
                         .HasColumnType("uniqueidentifier");

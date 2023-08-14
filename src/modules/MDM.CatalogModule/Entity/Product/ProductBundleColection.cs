@@ -12,6 +12,8 @@ public class ProductBundleColection : CreationAuditedEntity<Guid>
 
     public Guid ProductBundleId { get; set; }
 
+
+
     [ForeignKey(nameof(ProductBundleId))]
     public ProductBundle ProductBundle { get; set; }
 

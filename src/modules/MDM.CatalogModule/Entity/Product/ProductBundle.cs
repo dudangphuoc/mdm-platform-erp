@@ -8,7 +8,10 @@ namespace MDM.CatalogModule.Entity.Product;
 [Table("ProductBundles")]
 public class ProductBundle : MDMFullAuditedEntityBase
 {
+    [Column(TypeName = "nvarchar(128)")]
     public string Name { get; set; }
+
+    public required EProductBundleType ProductBundleType { get; set; } 
 
     public Guid? ProductRelated { get; set; }
 

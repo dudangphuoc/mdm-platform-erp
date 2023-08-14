@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20230814093850_init")]
+    [Migration("20230814100629_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -2218,10 +2218,13 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<Guid?>("ProductBaseId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProductBundleType")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("ProductRelated")
                         .HasColumnType("uniqueidentifier");

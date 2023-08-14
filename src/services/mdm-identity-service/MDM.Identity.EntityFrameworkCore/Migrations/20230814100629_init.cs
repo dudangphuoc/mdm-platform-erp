@@ -1332,7 +1332,8 @@ namespace Identity.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", nullable: false),
+                    ProductBundleType = table.Column<int>(type: "int", nullable: false),
                     ProductRelated = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ProductBaseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),

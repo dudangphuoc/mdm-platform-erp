@@ -13,6 +13,8 @@
 	  <ProjectReference Include="..\..\..\modules\MDM.CatalogModule\MDM.CatalogModule.csproj" />
 	  <ProjectReference Include="..\..\..\modules\MDM.CommonModule\MDM.CommonModule.csproj" />
 	  <ProjectReference Include="..\..\..\modules\MDM.CustomerModule\MDM.CustomerModule.csproj" />
+	  <ProjectReference Include="..\..\..\modules\MDM.OrderModule\MDM.OrderModule.csproj" />
+	  <ProjectReference Include="..\..\..\modules\MDM.PaymentModule\MDM.PaymentModule.csproj" />
 	</ItemGroup>
 
 </Project>

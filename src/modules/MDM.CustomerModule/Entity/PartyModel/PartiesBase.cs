@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CustomerModule.Entity.PartyModel;
 
-[InjectContext]
+
 [Table("Parties")]
 public class PartiesBase : MDMFullAuditedEntityBase, IPassivable
 {

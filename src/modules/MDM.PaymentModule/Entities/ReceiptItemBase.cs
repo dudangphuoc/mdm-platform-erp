@@ -1,10 +1,13 @@
-﻿using MDM.ModuleBase;
+﻿using MDM.Common.EntityFactory;
+using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.PaymentModule.Entities;
 
 
-public class ReceiptItemBase<TReference> : MDMFullAuditedEntityBase
+[Table("ReceiptItem")]
+public abstract class ReceiptItemBase : MDMFullAuditedEntityBase
 {
     public Guid ReceiptId { get; set; }
 
@@ -12,6 +15,4 @@ public class ReceiptItemBase<TReference> : MDMFullAuditedEntityBase
 
     [DataType("decimal(18,2)")]
     public decimal TotalAmount { get; set; }
-
-    public InvoiceBase<TReference> Invoice { get; set; }
 }

@@ -3,14 +3,19 @@ using Abp.Zero.EntityFrameworkCore;
 using AuthorizationModule.Authorization.Roles;
 using AuthorizationModule.Authorization.Users;
 using AuthorizationModule.MultiTenancy;
+using Identity.Core;
+using Identity.Core.Entities;
 using MDM.CatalogModule;
 using MDM.CatalogModule.Entity.Product;
 using MDM.Common.EntityFactory;
+using MDM.CommonModule;
 using MDM.CustomerModule;
 using MDM.CustomerModule.Entity.CustomerModel;
 using MDM.CustomerModule.Entity.Employee;
 using MDM.CustomerModule.Entity.PartyAssignment;
 using MDM.CustomerModule.Entity.PartyModel;
+using MDM.OrderModule;
+using MDM.PaymentModule;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection;
@@ -28,14 +33,13 @@ namespace Identity.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-            foreach (var type in RegisterDbSet.ShouldHasAttribute(
-                typeof(CatalogModule).GetAssembly(),
-                typeof(CatalogModule).GetAssembly(),
-                typeof(CustomerModule).GetAssembly()))
+            //
+
+            foreach (var type in RegisterDbSet.ShouldHasAttribute(typeof(IdentityCoreModule).GetAssembly()))
             {
                 modelBuilder.Entity(type);
             }
+
             modelBuilder.ChangeAbpTablePrefix<Tenant, Role, User>("");
             modelBuilder.ConfigureBaseService();
             ConfigureBaseService(modelBuilder);
@@ -88,6 +92,13 @@ namespace Identity.EntityFrameworkCore
             {
                 p.HasOne(p => p.ProductBundleColection).WithMany(x => x.ProductBundleVariants).HasForeignKey(p => p.ProductBundleColectionId).OnDelete(DeleteBehavior.NoAction);
             });
+
+            builder.Entity<Payment>(p =>
+            {
+                p.HasOne(p => p.Party).WithMany().OnDelete(DeleteBehavior.NoAction);
+                p.HasOne(p => p.PaymentMethod).WithMany().OnDelete(DeleteBehavior.NoAction);
+            });
+
         }
 
 

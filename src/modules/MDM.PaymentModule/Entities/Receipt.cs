@@ -1,9 +1,12 @@
-﻿using MDM.ModuleBase;
+﻿using MDM.Common.EntityFactory;
+using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.PaymentModule.Entities;
 
+[InjectContext]
+[Table("Receipt")]
 public class Receipt : MDMFullAuditedEntityBase
 {
     /// <summary>

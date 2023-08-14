@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MDM.CatalogModule.Entity.Product;
 
 [InjectContext]
-[Table(nameof(ProductBase))]
+[Table("Products")]
 public class ProductBase : MDMFullAuditedEntityBase
 {
     public Guid? BrandId { get; set; }

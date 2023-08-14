@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using MDM.Common.EntityFactory;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Product;
@@ -12,7 +13,8 @@ public class ProductBundleColection : CreationAuditedEntity<Guid>
 
     public Guid ProductBundleId { get; set; }
 
-
+    [DataType("Decimal(18,2)")]
+    public decimal Quantity { get; set; }
 
     [ForeignKey(nameof(ProductBundleId))]
     public ProductBundle ProductBundle { get; set; }

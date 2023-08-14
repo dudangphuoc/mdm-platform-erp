@@ -6,7 +6,7 @@ namespace MDM.CatalogModule.Entity.Price;
 
 [InjectContext]
 [Table("Price")]
-public class Price : MDMFullAuditedEntityBase
+public class Price : MDMFullAuditedEntityBase, IMayHavePrimary
 {
     public Guid PriceListId { get; set; }
 

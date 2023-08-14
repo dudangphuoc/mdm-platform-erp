@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.PaymentModule.Entities;
 
-public class InvoiceBase<TReference> : MDMFullAuditedEntityBase
+public abstract class InvoiceBase<TReference> : MDMFullAuditedEntityBase
 {
-    public Guid? OrderId { get; set; }
-
     [Column(TypeName = "varchar(50)")]
     public string InvoiceCode { get; set; }
 
@@ -20,8 +18,8 @@ public class InvoiceBase<TReference> : MDMFullAuditedEntityBase
 
     [Column(TypeName = "nvarchar(1000)")]
     public string Note { get; set; }
+  
+    public virtual TReference Order { get; set; }
 
-    public TReference Order { get; set; }
-
-    public ICollection<ReceiptItemBase<TReference>> ReceiptItems { get; set; }
+    
 }

@@ -6,7 +6,7 @@ namespace MDM.CatalogModule.Entity.Product;
 
 [InjectContext]
 [Table(nameof(ProductVariant))]
-public class ProductVariant : MDMFullAuditedEntityBase
+public class ProductVariant : MDMFullAuditedEntityBase, IMayHavePrimary
 {
     [Column(TypeName = "nvarchar(64)")]
     public string Code { get; set; }
@@ -20,6 +20,8 @@ public class ProductVariant : MDMFullAuditedEntityBase
     public int DisplayOrder { get; set; }
 
     public Guid ProductId { get; set; }
+
+    public bool IsPrimary { get; set; }
 
     [ForeignKey(nameof(ProductId))]
     public ProductBase Product { get; set; }

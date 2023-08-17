@@ -1235,7 +1235,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductMedia",
+                name: "ProductMediaBase",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -2558,7 +2558,7 @@ namespace Identity.EntityFrameworkCore.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductMedia_ProductId",
-                table: "ProductMedia",
+                table: "ProductMediaBase",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -2921,7 +2921,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "ProductBundleVariants");
 
             migrationBuilder.DropTable(
-                name: "ProductMedia");
+                name: "ProductMediaBase");
 
             migrationBuilder.DropTable(
                 name: "ReceiptItem");

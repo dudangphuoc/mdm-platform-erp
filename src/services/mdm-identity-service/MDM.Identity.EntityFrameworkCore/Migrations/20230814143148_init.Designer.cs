@@ -2147,7 +2147,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundle", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleBase", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2197,7 +2197,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.ToTable("ProductBundles");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColection", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColectionBase", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2257,7 +2257,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.ToTable("ProductBundleVariants");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMedia", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMediaBase", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2307,7 +2307,7 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductMedia");
+                    b.ToTable("ProductMediaBase");
                 });
 
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductUnit", b =>
@@ -4067,16 +4067,16 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("ProductUnit");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundle", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleBase", b =>
                 {
                     b.HasOne("MDM.CatalogModule.Entity.Product.ProductBase", null)
                         .WithMany("ProductBundles")
                         .HasForeignKey("ProductBaseId");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColection", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColectionBase", b =>
                 {
-                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductBundle", "ProductBundle")
+                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductBundleBase", "ProductBundleBase")
                         .WithMany("BundleColection")
                         .HasForeignKey("ProductBundleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -4090,12 +4090,12 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.Navigation("Product");
 
-                    b.Navigation("ProductBundle");
+                    b.Navigation("ProductBundleBase");
                 });
 
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleVariant", b =>
                 {
-                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductBundleColection", "ProductBundleColection")
+                    b.HasOne("MDM.CatalogModule.Entity.Product.ProductBundleColectionBase", "ProductBundleColectionBase")
                         .WithMany("ProductBundleVariants")
                         .HasForeignKey("ProductBundleColectionId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -4107,12 +4107,12 @@ namespace Identity.EntityFrameworkCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductBundleColection");
+                    b.Navigation("ProductBundleColectionBase");
 
                     b.Navigation("ProductVariant");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMedia", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMediaBase", b =>
                 {
                     b.HasOne("MDM.CatalogModule.Entity.Product.ProductBase", "Product")
                         .WithMany("ProductMedias")
@@ -4546,12 +4546,12 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("ProductMedias");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundle", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleBase", b =>
                 {
                     b.Navigation("BundleColection");
                 });
 
-            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColection", b =>
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductBundleColectionBase", b =>
                 {
                     b.Navigation("ProductBundleVariants");
                 });

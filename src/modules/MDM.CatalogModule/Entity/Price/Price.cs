@@ -8,12 +8,6 @@ namespace MDM.CatalogModule.Entity.Price;
 [Table("Price")]
 public class Price : MDMFullAuditedEntityBase, IMayHavePrimary
 {
-    public Guid PriceListId { get; set; }
-
-    public string EntityName { get; set; }
-
-    public Guid EntityId { get; set; }
-
     [Column(TypeName = "decimal(18,2)")]
     public decimal BasePrice { get; set; }
 
@@ -29,6 +23,5 @@ public class Price : MDMFullAuditedEntityBase, IMayHavePrimary
     [Column(TypeName = "decimal(18,2)")]
     public decimal? Percent { get; set; }
 
-    [ForeignKey(nameof(PriceListId))]
     public PriceList PriceList { get; set; }
 }

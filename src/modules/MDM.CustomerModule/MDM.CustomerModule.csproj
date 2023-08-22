@@ -10,4 +10,8 @@
     <ProjectReference Include="..\MDM.ModuleBase\MDM.ModuleBase.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AtttributeModule\" />
+  </ItemGroup>
+
 </Project>

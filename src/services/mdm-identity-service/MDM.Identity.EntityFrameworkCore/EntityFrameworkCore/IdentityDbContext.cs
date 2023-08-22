@@ -5,20 +5,12 @@ using AuthorizationModule.Authorization.Users;
 using AuthorizationModule.MultiTenancy;
 using Identity.Core;
 using Identity.Core.Entities;
-using MDM.CatalogModule;
 using MDM.Common.EntityFactory;
-using MDM.CommonModule;
-using MDM.CustomerModule;
 using MDM.CustomerModule.Entity.CustomerModel;
 using MDM.CustomerModule.Entity.Employee;
 using MDM.CustomerModule.Entity.PartyAssignment;
 using MDM.CustomerModule.Entity.PartyModel;
-using MDM.OrderModule;
-using MDM.PaymentModule;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace Identity.EntityFrameworkCore
 {
@@ -32,7 +24,6 @@ namespace Identity.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //
 
             foreach (var type in RegisterDbSet.ShouldHasAttribute(typeof(IdentityCoreModule).GetAssembly()))
             {
@@ -43,7 +34,7 @@ namespace Identity.EntityFrameworkCore
             modelBuilder.ConfigureBaseService();
             ConfigureBaseService(modelBuilder);
         }
-        public void ConfigureBaseService( ModelBuilder builder)
+        public void ConfigureBaseService(ModelBuilder builder)
         {
             builder.Entity<PartyRoleAssignment>(entity =>
             {
@@ -88,15 +79,18 @@ namespace Identity.EntityFrameworkCore
                 p.HasOne(p => p.PaymentMethod).WithMany().OnDelete(DeleteBehavior.NoAction);
             });
 
-            builder.Entity<ProductBundle>(p => {
+            builder.Entity<ProductBundle>(p =>
+            {
                 p.HasOne(x => x.Product).WithMany(x => x.ProductBundles).OnDelete(DeleteBehavior.NoAction);
             });
-            builder.Entity<ProductBundleColection>(p => {
+            builder.Entity<ProductBundleColection>(p =>
+            {
                 p.HasOne(x => x.Product).WithMany(x => x.ProductBundleColections).OnDelete(DeleteBehavior.NoAction);
             });
 
             ///config product gift
-            builder.Entity<Gift>(p => {
+            builder.Entity<Gift>(p =>
+            {
                 p.HasMany(x => x.Products).WithMany(x => x.Gifts).UsingEntity<ProductGift>(
                     l => l.HasOne(x => x.Product).WithMany().HasForeignKey(u => u.ProductId).OnDelete(DeleteBehavior.NoAction),
                     r => r.HasOne(x => x.Gift).WithMany().HasForeignKey(u => u.GiftId).OnDelete(DeleteBehavior.NoAction),
@@ -107,7 +101,8 @@ namespace Identity.EntityFrameworkCore
             });
 
             ///config product related
-            builder.Entity<Product>(p => {
+            builder.Entity<Product>(p =>
+            {
                 p.HasMany(x => x.Gifts).WithMany(x => x.Products).UsingEntity<ProductGift>(
                     l => l.HasOne(x => x.Gift).WithMany().HasForeignKey(u => u.GiftId).OnDelete(DeleteBehavior.NoAction),
                     r => r.HasOne(x => x.Product).WithMany().HasForeignKey(u => u.ProductId).OnDelete(DeleteBehavior.NoAction),

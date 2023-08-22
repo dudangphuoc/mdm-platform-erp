@@ -19,6 +19,7 @@ namespace Identity.Application
         {
             var thisAssembly = typeof(IdentityApplicationModule).GetAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
+
             Configuration.Modules.AbpAutoMapper().Configurators.Add(
                 cfg => cfg.AddMaps(thisAssembly)
             );

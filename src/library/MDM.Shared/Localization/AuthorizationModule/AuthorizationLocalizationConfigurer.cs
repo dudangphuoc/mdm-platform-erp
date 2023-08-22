@@ -8,13 +8,15 @@ namespace MDM.Shared.Localization.AuthorizationModule
 {
     public static class AuthorizationLocalizationConfigurer
     {
+        //"MDM.Shared.Localization.CustomerModule.SourceFiles"
+        //"AuthorizationModule.Localization.SourceFiles"
         public static void Configure(ILocalizationConfiguration localizationConfiguration)
         {
             localizationConfiguration.Sources.Add(
                 new DictionaryBasedLocalizationSource(GlobalConsts.LocalizationSourceName,
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
                         typeof(AuthorizationLocalizationConfigurer).GetAssembly(),
-                        "AuthorizationModule.Localization.SourceFiles"
+                        "MDM.Shared.Localization.AuthorizationModule.SourceFiles"
                     )
                 )
             );

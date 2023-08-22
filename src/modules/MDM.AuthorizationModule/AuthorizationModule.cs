@@ -7,11 +7,12 @@ using AuthorizationModule.Authorization;
 using AuthorizationModule.Authorization.Roles;
 using AuthorizationModule.Authorization.Users;
 using AuthorizationModule.MultiTenancy;
+using MDM.ModuleBase;
 using MDM.Shared.Localization.AuthorizationModule;
 
 namespace MDM.AuthorizationModule
 {
-    [DependsOn(typeof(AbpZeroCoreModule), typeof(AbpZeroCoreEntityFrameworkCoreModule))]
+    [DependsOn(typeof(AbpZeroCoreModule), typeof(AbpZeroCoreEntityFrameworkCoreModule), typeof(MDMModuleBase))]
     public class AuthorizationModule : AbpModule
     {
         public override void PreInitialize()

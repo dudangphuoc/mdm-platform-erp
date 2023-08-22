@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Price
 {
-    [InjectContext]
+    //[InjectContext]
     [Table("PriceLists")]
-    public class PriceList : MDMFullAuditedEntityBase
+    public abstract class PriceListBase<TPriceListAssignment, TPrice> : MDMFullAuditedEntityBase
     {
         public Guid CurrencyId { get; set; }
 
@@ -24,8 +24,8 @@ namespace MDM.CatalogModule.Entity.Price
 
         public DateTime? EndDate { get; set; }
 
-        public ICollection<Price>? Prices { get; set; }
+        public ICollection<TPrice>? Prices { get; set; }
 
-        public ICollection<PriceListAssignment>? PriceListAssignments { get; set; }
+        public ICollection<TPriceListAssignment>? PriceListAssignments { get; set; }
     }
 }

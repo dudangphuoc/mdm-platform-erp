@@ -4,17 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Price;
 
-[InjectContext]
+//[InjectContext]
 [Table("PriceListAssignments")]
-public class PriceListAssignment : MDMFullAuditedEntityBase
+public abstract class PriceListAssignmentBase<TPriceList, TCustomerSegmentType> : MDMFullAuditedEntityBase
 {
-    [ForeignKey(nameof(PriceListId))]
-    public PriceList PriceList { get; set; }
-
-    public Guid PriceListId { get; set; }
-
-    public Guid CustomerSegmentTypeId { get; set; }
-
     [Column(TypeName = "nvarchar(4000)")]
     public string? ConditionExpression { get; set; }
+
+    public TPriceList PriceList { get; set; }
+
+    public TCustomerSegmentType CustomerSegmentType { get; set; }
 }

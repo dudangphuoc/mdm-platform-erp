@@ -1,12 +1,11 @@
-﻿using MDM.Common.EntityFactory;
-using MDM.ModuleBase;
+﻿using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CatalogModule.Entity.Price;
 
-[InjectContext]
+
 [Table("Price")]
-public class Price : MDMFullAuditedEntityBase, IMayHavePrimary
+public abstract class PriceBase<TPriceList> : MDMFullAuditedEntityBase, IMayHavePrimary
 {
     [Column(TypeName = "decimal(18,2)")]
     public decimal BasePrice { get; set; }
@@ -23,5 +22,5 @@ public class Price : MDMFullAuditedEntityBase, IMayHavePrimary
     [Column(TypeName = "decimal(18,2)")]
     public decimal? Percent { get; set; }
 
-    public PriceList PriceList { get; set; }
+    public TPriceList PriceList { get; set; }
 }

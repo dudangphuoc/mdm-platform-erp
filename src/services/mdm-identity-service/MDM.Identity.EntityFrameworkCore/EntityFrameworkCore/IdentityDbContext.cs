@@ -14,12 +14,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Identity.EntityFrameworkCore
 {
+
+
     public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDbContext>
     {
-        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
-            : base(options)
+        public DbSet<PartyType> PartyTypes { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            base.OnConfiguring(optionsBuilder);
         }
+
+
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +41,14 @@ namespace Identity.EntityFrameworkCore
             modelBuilder.ConfigureBaseService();
             ConfigureBaseService(modelBuilder);
         }
+
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
+          : base(options)
+        {
+
+
+        }
+
         public void ConfigureBaseService(ModelBuilder builder)
         {
             builder.Entity<PartyRoleAssignment>(entity =>

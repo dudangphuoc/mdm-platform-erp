@@ -8,7 +8,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!--<PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.4.0" />-->
-		<PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="8.2.0" />
+		<PackageReference Include="Abp.ZeroCore.EntityFrameworkCore" Version="8.1.0" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\MDM.ModuleBase\MDM.ModuleBase.csproj" />

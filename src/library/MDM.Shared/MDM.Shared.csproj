@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Abp" Version="8.2.0" />
+		<PackageReference Include="Abp" Version="8.1.0" />
 	</ItemGroup>
 
 </Project>

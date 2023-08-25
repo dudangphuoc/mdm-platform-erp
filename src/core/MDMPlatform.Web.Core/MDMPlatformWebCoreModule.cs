@@ -60,8 +60,8 @@ namespace MDMPlatform
 
         public override void PostInitialize()
         {
-            IocManager.Resolve<ApplicationPartManager>()
-                .AddApplicationPartsIfNotAddedBefore(typeof(MDMPlatformWebCoreModule).Assembly);
+            //IocManager.Resolve<ApplicationPartManager>()
+            //    .AddApplicationPartsIfNotAddedBefore(typeof(MDMPlatformWebCoreModule).Assembly);
         }
     }
 }

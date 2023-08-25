@@ -1,4 +1,5 @@
-﻿using Abp.Modules;
+﻿using Abp.AutoMapper;
+using Abp.Modules;
 using Abp.Reflection.Extensions;
 using MDM.Identity.Html;
 
@@ -10,7 +11,16 @@ namespace SelfHost.Startup
     {
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(typeof(SelfHostModule).GetAssembly());
+            var thisAssembly = typeof(SelfHostModule).GetAssembly();
+            IocManager.RegisterAssemblyByConvention(thisAssembly);
+
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(
+                cfg =>
+                {
+                    cfg.AddMaps(thisAssembly);
+                }
+            );
         }
+      
     }
 }

@@ -25,6 +25,7 @@ namespace Identity.EntityFrameworkCore;
 
 public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDbContext>
 {
+    #region db_set
     public DbSet<PartyType> PartyTypes { get; set; }
     public DbSet<Gift> Gifts { get; set; }
     public DbSet<GiftItem> GiftItems { get; set; }
@@ -82,7 +83,8 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<PersonBase> PersonBases { get; set; }
     public DbSet<OrderType> OrderTypes { get; set; }
     public DbSet<ShippingType> ShippingTypes { get; set; }
-    public DbSet<Receipt> Receipts { get; set; }
+    public DbSet<Receipt> Receipts { get; set; } 
+    #endregion
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -106,7 +108,6 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
       : base(options)
     {
-
     }
 
     public void ConfigureBaseService(ModelBuilder builder)

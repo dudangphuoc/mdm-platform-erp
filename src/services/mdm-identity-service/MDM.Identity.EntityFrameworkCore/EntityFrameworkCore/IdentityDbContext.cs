@@ -63,7 +63,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<CustomerTypeGroup> CustomerTypeGroups { get; set; }
     public DbSet<CustomerAttribute> CustomerAttributes { get; set; }
     public DbSet<CustomerAtrributeValue> CustomerAtrributeValues { get; set; }
-    public DbSet<Branch> GetBranches { get; set; }
+    public DbSet<Branch> Branches { get; set; }
     public DbSet<EmployeeBase> Employees { get; set; }
     public DbSet<EmployeeType> EmployeeTypes { get; set; }
     public DbSet<Team> Teams { get; set; }
@@ -187,5 +187,17 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
                     j.HasKey(t => new { t.ProductId, t.GiftId });
                 });
         });
+
+        builder.Entity<Branch>(p =>
+        {
+            p.HasOne(x => x.Party).WithOne(x => x.Branch).OnDelete(DeleteBehavior.NoAction);
+            p.HasOne(x => x.PartyRoleAssignment).WithOne().OnDelete(DeleteBehavior.NoAction);
+        });
+
+        builder.Entity<Invoice>(p => {
+            p.HasOne(x => x.Order).WithOne(x => x.Invoice).OnDelete(DeleteBehavior.NoAction);
+        });
+
+
     }
 }

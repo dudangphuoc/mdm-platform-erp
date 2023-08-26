@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MDM.CustomerModule.Entity.Employee
 {
     [InjectContext]
+    [Table("Branches")]
     public class Branch : MDMFullAuditedEntityBase
     {
         public Guid? PartyId { get; set; }

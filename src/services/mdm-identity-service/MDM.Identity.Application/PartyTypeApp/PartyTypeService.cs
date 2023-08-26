@@ -9,7 +9,6 @@ public class PartyTypeService : AsyncCrudAppService<PartyType, PartyTypeModel, G
 {
     public PartyTypeService(IRepository<PartyType, Guid> repository) : base(repository)
     {
-        
     }
 
     [AllowAnonymous]

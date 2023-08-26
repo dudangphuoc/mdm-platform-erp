@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Identity.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class addinitdbcontext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -102,7 +102,37 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerAttribute",
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    IncludeInTopMenu = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(512)", nullable: false),
+                    SeoTitle = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    SeoKeywords = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    SeoDescription = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    SeoSlug = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerAttributes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -114,7 +144,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerAttribute", x => x.Id);
+                    table.PrimaryKey("PK_CustomerAttributes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,6 +252,69 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ExtensionGroups",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "varchar(128)", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExtensionGroups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Gifts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    ProductGiftType = table.Column<int>(type: "int", nullable: false),
+                    MaxChoice = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    EffectStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EffectEndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gifts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    InvoiceCode = table.Column<string>(type: "varchar(50)", nullable: false),
+                    InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    InvoiceStatus = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(1000)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoices", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Languages",
                 columns: table => new
                 {
@@ -264,6 +357,27 @@ namespace Identity.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LanguageTexts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MDMTag",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(512)", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MDMTag", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -421,6 +535,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "varchar(200)", nullable: false),
+                    NormalizedName = table.Column<string>(type: "varchar(200)", nullable: false),
                     Desc = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
@@ -453,6 +568,27 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PaymentType",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Persons",
                 columns: table => new
                 {
@@ -472,6 +608,32 @@ namespace Identity.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Persons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PriceLists",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    CurrencyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(500)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(4000)", nullable: true),
+                    Priority = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PriceLists", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -515,6 +677,21 @@ namespace Identity.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Receipt", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShippingTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShippingTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -838,30 +1015,31 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ExtensionName",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProductUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(500)", nullable: false),
-                    Slug = table.Column<string>(type: "varchar(500)", nullable: false),
-                    MetaTitle = table.Column<string>(type: "nvarchar(500)", nullable: true),
-                    MetaKeyword = table.Column<string>(type: "nvarchar(1000)", nullable: true),
-                    MetaDescription = table.Column<string>(type: "nvarchar(4000)", nullable: true),
-                    ShortDescription = table.Column<string>(type: "nvarchar(4000)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    IsPublished = table.Column<bool>(type: "bit", nullable: false),
-                    PublishedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    StockTrackingIsEnabled = table.Column<bool>(type: "bit", nullable: true),
-                    StockQuantity = table.Column<int>(type: "int", nullable: true),
-                    Sku = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Gtin = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Thumbnail = table.Column<string>(type: "nvarchar(4000)", nullable: true),
-                    MarkAsNew = table.Column<bool>(type: "bit", nullable: true),
-                    MarkAsNewStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MarkAsNewEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "varchar(128)", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExtensionName", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExtensionName_ExtensionGroups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "ExtensionGroups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GiftItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -869,21 +1047,101 @@ namespace Identity.EntityFrameworkCore.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true)
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<float>(type: "real", nullable: false),
+                    GiftId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_GiftItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "Id");
+                        name: "FK_GiftItems_Gifts_GiftId",
+                        column: x => x.GiftId,
+                        principalTable: "Gifts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReceiptItem",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    ReceiptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvoiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReceiptItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_ProductUnit_ProductUnitId",
-                        column: x => x.ProductUnitId,
-                        principalTable: "ProductUnit",
-                        principalColumn: "Id");
+                        name: "FK_ReceiptItem_Invoices_InvoiceId",
+                        column: x => x.InvoiceId,
+                        principalTable: "Invoices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TagRelated",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EntityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagRelated", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TagRelated_MDMTag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "MDMTag",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PriceListAssignments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    ConditionExpression = table.Column<string>(type: "nvarchar(4000)", nullable: true),
+                    PriceListId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerSegmentTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PriceListAssignments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PriceListAssignments_CustomerSegmentTypes_CustomerSegmentTypeId",
+                        column: x => x.CustomerSegmentTypeId,
+                        principalTable: "CustomerSegmentTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PriceListAssignments_PriceLists_PriceListId",
+                        column: x => x.PriceListId,
+                        principalTable: "PriceLists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1207,14 +1465,15 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductBundles",
+                name: "ExtensionValue",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", nullable: false),
-                    ProductBundleType = table.Column<int>(type: "int", nullable: false),
-                    ProductRelated = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProductBaseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExtensionNameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EntityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Value = table.Column<string>(type: "varchar(512)", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1226,55 +1485,23 @@ namespace Identity.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductBundles", x => x.Id);
+                    table.PrimaryKey("PK_ExtensionValue", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductBundles_Products_ProductBaseId",
-                        column: x => x.ProductBaseId,
-                        principalTable: "Products",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductMediaBase",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(512)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(512)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(4000)", nullable: true),
-                    MediaType = table.Column<int>(type: "int", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductMedia", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductMedia_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_ExtensionValue_ExtensionName_ExtensionNameId",
+                        column: x => x.ExtensionNameId,
+                        principalTable: "ExtensionName",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductVariant",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(64)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
-                    Barcode = table.Column<string>(type: "nvarchar(128)", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsPrimary = table.Column<bool>(type: "bit", nullable: false),
+                    ProductUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GiftItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1282,15 +1509,104 @@ namespace Identity.EntityFrameworkCore.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true)
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    MarkAsNew = table.Column<bool>(type: "bit", nullable: false),
+                    StockTrackingIsEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    ProductType = table.Column<int>(type: "int", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    StockQuantity = table.Column<int>(type: "int", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SalePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(500)", nullable: false),
+                    Slug = table.Column<string>(type: "varchar(500)", nullable: false),
+                    MetaTitle = table.Column<string>(type: "nvarchar(500)", nullable: true),
+                    MetaKeyword = table.Column<string>(type: "nvarchar(1000)", nullable: true),
+                    MetaDescription = table.Column<string>(type: "nvarchar(4000)", nullable: true),
+                    ShortDescription = table.Column<string>(type: "nvarchar(4000)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Sku = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Gtin = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Thumbnail = table.Column<string>(type: "nvarchar(4000)", nullable: true),
+                    PublishedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MarkAsNewStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MarkAsNewEndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductVariant", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductVariant_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_GiftItems_GiftItemId",
+                        column: x => x.GiftItemId,
+                        principalTable: "GiftItems",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_ProductUnit_ProductUnitId",
+                        column: x => x.ProductUnitId,
+                        principalTable: "ProductUnit",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvoidId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    OrderCode = table.Column<string>(type: "varchar(50)", nullable: false),
+                    PaymentStatus = table.Column<int>(type: "int", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
+                    ShippingStatus = table.Column<int>(type: "int", nullable: true),
+                    ApproveDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CompletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TaxAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    SubTotalWithDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderNote = table.Column<string>(type: "nvarchar(512)", nullable: true),
+                    OrderTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PartyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymentMethodId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Invoices_InvoidId",
+                        column: x => x.InvoidId,
+                        principalTable: "Invoices",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_OrderTypes_OrderTypeId",
+                        column: x => x.OrderTypeId,
+                        principalTable: "OrderTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Parties_PartyId",
+                        column: x => x.PartyId,
+                        principalTable: "Parties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_PaymentMethod_PaymentMethodId",
+                        column: x => x.PaymentMethodId,
+                        principalTable: "PaymentMethod",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1464,35 +1780,273 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductBundleColections",
+                name: "Price",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductRelated = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductBundleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsPrimary = table.Column<bool>(type: "bit", nullable: false),
+                    MinQuantity = table.Column<float>(type: "real", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(4000)", nullable: true),
+                    ComputePrice = table.Column<int>(type: "int", nullable: true),
+                    Percent = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PriceListId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductBundleColections", x => x.Id);
+                    table.PrimaryKey("PK_Price", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductBundleColections_ProductBundles_ProductBundleId",
-                        column: x => x.ProductBundleId,
-                        principalTable: "ProductBundles",
+                        name: "FK_Price_PriceLists_PriceListId",
+                        column: x => x.PriceListId,
+                        principalTable: "PriceLists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductBundleColections_Products_ProductRelated",
-                        column: x => x.ProductRelated,
+                        name: "FK_Price_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductBundles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1000)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductBundles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductBundles_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductCategories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductCategories_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductCategories_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Branch",
+                name: "ProductGifts",
+                columns: table => new
+                {
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GiftId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductGifts", x => new { x.ProductId, x.GiftId });
+                    table.ForeignKey(
+                        name: "FK_ProductGifts_Gifts_GiftId",
+                        column: x => x.GiftId,
+                        principalTable: "Gifts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductGifts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductMedias",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(512)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(512)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(4000)", nullable: true),
+                    MediaType = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductMedias", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductMedias_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductRelated",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    RelatedType = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductRelated", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductRelated_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(500)", nullable: false),
+                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductType = table.Column<int>(type: "int", nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payment",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PartiesId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenantId = table.Column<int>(type: "int", nullable: true),
+                    ReceiptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymentCode = table.Column<string>(type: "varchar(100)", nullable: false),
+                    PaymentFeeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PaymentStatus = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PartyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymentMethodId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payment_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Payment_Parties_PartiesId",
+                        column: x => x.PartiesId,
+                        principalTable: "Parties",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Payment_Parties_PartyId",
+                        column: x => x.PartyId,
+                        principalTable: "Parties",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Payment_PaymentMethod_PaymentMethodId",
+                        column: x => x.PaymentMethodId,
+                        principalTable: "PaymentMethod",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Payment_Receipt_ReceiptId",
+                        column: x => x.ReceiptId,
+                        principalTable: "Receipt",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Branches",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1510,18 +2064,17 @@ namespace Identity.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Branch", x => x.Id);
+                    table.PrimaryKey("PK_Branches", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Branch_Parties_PartyId",
+                        name: "FK_Branches_Parties_PartyId",
                         column: x => x.PartyId,
                         principalTable: "Parties",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Branch_PartyRoleAssignments_PartyRoleAssignmentId",
+                        name: "FK_Branches_PartyRoleAssignments_PartyRoleAssignmentId",
                         column: x => x.PartyRoleAssignmentId,
                         principalTable: "PartyRoleAssignments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -1604,30 +2157,31 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductBundleVariants",
+                name: "ProductBundleColections",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductVariantRelated = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductBundleColectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsPrimary = table.Column<bool>(type: "bit", nullable: false),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true)
+                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
+                    IsPrimary = table.Column<bool>(type: "bit", nullable: false),
+                    Quantity = table.Column<float>(type: "real", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BundleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductBundleVariants", x => x.Id);
+                    table.PrimaryKey("PK_ProductBundleColections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductBundleVariants_ProductBundleColections_ProductBundleColectionId",
-                        column: x => x.ProductBundleColectionId,
-                        principalTable: "ProductBundleColections",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductBundleVariants_ProductVariant_ProductVariantRelated",
-                        column: x => x.ProductVariantRelated,
-                        principalTable: "ProductVariant",
+                        name: "FK_ProductBundleColections_ProductBundles_BundleId",
+                        column: x => x.BundleId,
+                        principalTable: "ProductBundles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductBundleColections_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -1655,9 +2209,9 @@ namespace Identity.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_Team", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Team_Branch_BranchId",
+                        name: "FK_Team_Branches_BranchId",
                         column: x => x.BranchId,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Team_Team_ParentId",
@@ -1884,7 +2438,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerAtrributeValue",
+                name: "CustomerAtrributeValues",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1899,20 +2453,20 @@ namespace Identity.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerAtrributeValue", x => x.Id);
+                    table.PrimaryKey("PK_CustomerAtrributeValues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerAtrributeValue_Branch_BranchId",
+                        name: "FK_CustomerAtrributeValues_Branches_BranchId",
                         column: x => x.BranchId,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CustomerAtrributeValue_CustomerAttribute_AttributeId",
+                        name: "FK_CustomerAtrributeValues_CustomerAttributes_AttributeId",
                         column: x => x.AttributeId,
-                        principalTable: "CustomerAttribute",
+                        principalTable: "CustomerAttributes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerAtrributeValue_Employee_EmployeeBaseId",
+                        name: "FK_CustomerAtrributeValues_Employee_EmployeeBaseId",
                         column: x => x.EmployeeBaseId,
                         principalTable: "Employee",
                         principalColumn: "Id");
@@ -1945,214 +2499,6 @@ namespace Identity.EntityFrameworkCore.Migrations
                         column: x => x.TeamId,
                         principalTable: "Team",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Invoice",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true),
-                    InvoiceCode = table.Column<string>(type: "varchar(50)", nullable: false),
-                    InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InvoiceStatus = table.Column<int>(type: "int", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(1000)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Invoice", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InvoidId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true),
-                    OrderCode = table.Column<string>(type: "varchar(50)", nullable: false),
-                    PaymentStatus = table.Column<int>(type: "int", nullable: false),
-                    OrderStatus = table.Column<int>(type: "int", nullable: false),
-                    ShippingStatus = table.Column<int>(type: "int", nullable: true),
-                    ApproveDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CompletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TaxAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrderTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SubTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SubTotalWithDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrderNote = table.Column<string>(type: "nvarchar(512)", nullable: true),
-                    OrderTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PartyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PaymentMethodId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_Invoice_InvoidId",
-                        column: x => x.InvoidId,
-                        principalTable: "Invoice",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_OrderTypes_OrderTypeId",
-                        column: x => x.OrderTypeId,
-                        principalTable: "OrderTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_Parties_PartyId",
-                        column: x => x.PartyId,
-                        principalTable: "Parties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_PaymentMethod_PaymentMethodId",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "PaymentMethod",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ReceiptItem",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true),
-                    ReceiptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InvoiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReceiptItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ReceiptItem_Invoice_InvoiceId",
-                        column: x => x.InvoiceId,
-                        principalTable: "Invoice",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderItems",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true),
-                    ProductName = table.Column<string>(type: "nvarchar(500)", nullable: false),
-                    Thumbnail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductType = table.Column<int>(type: "int", nullable: true),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderItems_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payment",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PartiesId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorUserId = table.Column<long>(type: "bigint", nullable: true),
-                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifierUserId = table.Column<long>(type: "bigint", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeleterUserId = table.Column<long>(type: "bigint", nullable: true),
-                    DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenantId = table.Column<int>(type: "int", nullable: true),
-                    ReceiptId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PaymentCode = table.Column<string>(type: "varchar(100)", nullable: false),
-                    PaymentFeeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentStatus = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PartyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PaymentMethodId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Payment_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Payment_Parties_PartiesId",
-                        column: x => x.PartiesId,
-                        principalTable: "Parties",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Payment_Parties_PartyId",
-                        column: x => x.PartyId,
-                        principalTable: "Parties",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Payment_PaymentMethod_PaymentMethodId",
-                        column: x => x.PaymentMethodId,
-                        principalTable: "PaymentMethod",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Payment_Receipt_ReceiptId",
-                        column: x => x.ReceiptId,
-                        principalTable: "Receipt",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -2201,30 +2547,31 @@ namespace Identity.EntityFrameworkCore.Migrations
                 column: "TelephoneId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_PartyId",
-                table: "Branch",
+                name: "IX_Branches_PartyId",
+                table: "Branches",
                 column: "PartyId",
                 unique: true,
                 filter: "[PartyId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_PartyRoleAssignmentId",
-                table: "Branch",
-                column: "PartyRoleAssignmentId");
+                name: "IX_Branches_PartyRoleAssignmentId",
+                table: "Branches",
+                column: "PartyRoleAssignmentId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerAtrributeValue_AttributeId",
-                table: "CustomerAtrributeValue",
+                name: "IX_CustomerAtrributeValues_AttributeId",
+                table: "CustomerAtrributeValues",
                 column: "AttributeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerAtrributeValue_BranchId",
-                table: "CustomerAtrributeValue",
+                name: "IX_CustomerAtrributeValues_BranchId",
+                table: "CustomerAtrributeValues",
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerAtrributeValue_EmployeeBaseId",
-                table: "CustomerAtrributeValue",
+                name: "IX_CustomerAtrributeValues_EmployeeBaseId",
+                table: "CustomerAtrributeValues",
                 column: "EmployeeBaseId");
 
             migrationBuilder.CreateIndex(
@@ -2345,6 +2692,16 @@ namespace Identity.EntityFrameworkCore.Migrations
                 column: "EntityChangeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExtensionName_GroupId",
+                table: "ExtensionName",
+                column: "GroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExtensionValue_ExtensionNameId",
+                table: "ExtensionValue",
+                column: "ExtensionNameId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Features_EditionId_Name",
                 table: "Features",
                 columns: new[] { "EditionId", "Name" });
@@ -2355,9 +2712,9 @@ namespace Identity.EntityFrameworkCore.Migrations
                 columns: new[] { "TenantId", "Name" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_OrderId",
-                table: "Invoice",
-                column: "OrderId");
+                name: "IX_GiftItems_GiftId",
+                table: "GiftItems",
+                column: "GiftId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Languages_TenantId_Name",
@@ -2532,33 +2889,63 @@ namespace Identity.EntityFrameworkCore.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBundleColections_ProductBundleId",
-                table: "ProductBundleColections",
-                column: "ProductBundleId");
+                name: "IX_Price_PriceListId",
+                table: "Price",
+                column: "PriceListId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBundleColections_ProductRelated",
-                table: "ProductBundleColections",
-                column: "ProductRelated");
+                name: "IX_Price_ProductId",
+                table: "Price",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBundles_ProductBaseId",
+                name: "IX_PriceListAssignments_CustomerSegmentTypeId",
+                table: "PriceListAssignments",
+                column: "CustomerSegmentTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PriceListAssignments_PriceListId",
+                table: "PriceListAssignments",
+                column: "PriceListId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBundleColections_BundleId",
+                table: "ProductBundleColections",
+                column: "BundleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBundleColections_ProductId",
+                table: "ProductBundleColections",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBundles_ProductId",
                 table: "ProductBundles",
-                column: "ProductBaseId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBundleVariants_ProductBundleColectionId",
-                table: "ProductBundleVariants",
-                column: "ProductBundleColectionId");
+                name: "IX_ProductCategories_CategoryId",
+                table: "ProductCategories",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBundleVariants_ProductVariantRelated",
-                table: "ProductBundleVariants",
-                column: "ProductVariantRelated");
+                name: "IX_ProductCategories_ProductId",
+                table: "ProductCategories",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductMedia_ProductId",
-                table: "ProductMediaBase",
+                name: "IX_ProductGifts_GiftId",
+                table: "ProductGifts",
+                column: "GiftId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductMedias_ProductId",
+                table: "ProductMedias",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductRelated_ProductId",
+                table: "ProductRelated",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -2567,14 +2954,14 @@ namespace Identity.EntityFrameworkCore.Migrations
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_GiftItemId",
+                table: "Products",
+                column: "GiftItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductUnitId",
                 table: "Products",
                 column: "ProductUnitId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductVariant_ProductId",
-                table: "ProductVariant",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReceiptItem_InvoiceId",
@@ -2621,6 +3008,11 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "IX_Settings_UserId",
                 table: "Settings",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TagRelated_TagId",
+                table: "TagRelated",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Team_BranchId",
@@ -2834,26 +3226,11 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "IX_Websites_PartyContactMethodId",
                 table: "Websites",
                 column: "PartyContactMethodId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Invoice_Orders_OrderId",
-                table: "Invoice",
-                column: "OrderId",
-                principalTable: "Orders",
-                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_Parties_PartyId",
-                table: "Orders");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Invoice_Orders_OrderId",
-                table: "Invoice");
-
             migrationBuilder.DropTable(
                 name: "AddressPartyContactMethod");
 
@@ -2867,7 +3244,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "BillingCustomers");
 
             migrationBuilder.DropTable(
-                name: "CustomerAtrributeValue");
+                name: "CustomerAtrributeValues");
 
             migrationBuilder.DropTable(
                 name: "CustomerSegments");
@@ -2880,6 +3257,9 @@ namespace Identity.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "EntityPropertyChanges");
+
+            migrationBuilder.DropTable(
+                name: "ExtensionValue");
 
             migrationBuilder.DropTable(
                 name: "Features");
@@ -2915,13 +3295,31 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "Payment");
 
             migrationBuilder.DropTable(
+                name: "PaymentType");
+
+            migrationBuilder.DropTable(
                 name: "Permissions");
 
             migrationBuilder.DropTable(
-                name: "ProductBundleVariants");
+                name: "Price");
 
             migrationBuilder.DropTable(
-                name: "ProductMediaBase");
+                name: "PriceListAssignments");
+
+            migrationBuilder.DropTable(
+                name: "ProductBundleColections");
+
+            migrationBuilder.DropTable(
+                name: "ProductCategories");
+
+            migrationBuilder.DropTable(
+                name: "ProductGifts");
+
+            migrationBuilder.DropTable(
+                name: "ProductMedias");
+
+            migrationBuilder.DropTable(
+                name: "ProductRelated");
 
             migrationBuilder.DropTable(
                 name: "ReceiptItem");
@@ -2931,6 +3329,12 @@ namespace Identity.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "ShippingTypes");
+
+            migrationBuilder.DropTable(
+                name: "TagRelated");
 
             migrationBuilder.DropTable(
                 name: "TeamHistory");
@@ -2984,10 +3388,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "TelePhones");
 
             migrationBuilder.DropTable(
-                name: "CustomerAttribute");
-
-            migrationBuilder.DropTable(
-                name: "CustomerSegmentTypes");
+                name: "CustomerAttributes");
 
             migrationBuilder.DropTable(
                 name: "Customers");
@@ -2999,19 +3400,34 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "EntityChanges");
 
             migrationBuilder.DropTable(
+                name: "ExtensionName");
+
+            migrationBuilder.DropTable(
                 name: "PartyAffiliationTypes");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Receipt");
 
             migrationBuilder.DropTable(
-                name: "ProductBundleColections");
+                name: "CustomerSegmentTypes");
 
             migrationBuilder.DropTable(
-                name: "ProductVariant");
+                name: "PriceLists");
+
+            migrationBuilder.DropTable(
+                name: "ProductBundles");
+
+            migrationBuilder.DropTable(
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "MDMTag");
 
             migrationBuilder.DropTable(
                 name: "Employee");
@@ -3035,7 +3451,19 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "EntityChangeSets");
 
             migrationBuilder.DropTable(
-                name: "ProductBundles");
+                name: "ExtensionGroups");
+
+            migrationBuilder.DropTable(
+                name: "Invoices");
+
+            migrationBuilder.DropTable(
+                name: "OrderTypes");
+
+            migrationBuilder.DropTable(
+                name: "PaymentMethod");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -3053,25 +3481,28 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "CustomerTypeGroups");
 
             migrationBuilder.DropTable(
-                name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Branch");
-
-            migrationBuilder.DropTable(
                 name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "GiftItems");
 
             migrationBuilder.DropTable(
                 name: "ProductUnit");
 
             migrationBuilder.DropTable(
+                name: "Branches");
+
+            migrationBuilder.DropTable(
+                name: "Gifts");
+
+            migrationBuilder.DropTable(
                 name: "PartyRoleAssignments");
 
             migrationBuilder.DropTable(
-                name: "PartyRoleTypes");
+                name: "Parties");
 
             migrationBuilder.DropTable(
-                name: "Parties");
+                name: "PartyRoleTypes");
 
             migrationBuilder.DropTable(
                 name: "PartyType");
@@ -3081,18 +3512,6 @@ namespace Identity.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Supplier");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Invoice");
-
-            migrationBuilder.DropTable(
-                name: "OrderTypes");
-
-            migrationBuilder.DropTable(
-                name: "PaymentMethod");
         }
     }
 }

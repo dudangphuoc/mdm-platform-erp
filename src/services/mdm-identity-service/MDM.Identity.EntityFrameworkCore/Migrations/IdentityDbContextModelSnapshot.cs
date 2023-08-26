@@ -1789,6 +1789,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<Guid?>("OrderId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("TenantId")
@@ -1799,9 +1800,7 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Invoice");
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("Identity.Core.Entities.Order", b =>
@@ -2662,6 +2661,107 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ExtensionGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExtensionGroups");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ExtensionName", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("ExtensionName");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ExtensionValue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ExtensionNameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("varchar(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExtensionNameId");
+
+                    b.ToTable("ExtensionValue");
+                });
+
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMedia", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2799,6 +2899,115 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentMethod");
+                });
+
+            modelBuilder.Entity("MDM.CommonModule.Payment.PaymentType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentType");
+                });
+
+            modelBuilder.Entity("MDM.CommonModule.Tag.MDMTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MDMTag");
+                });
+
+            modelBuilder.Entity("MDM.CommonModule.Tag.TagRelated", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("TagRelated");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.CustomerModel.BillingCustomer", b =>
@@ -3084,7 +3293,7 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.HasIndex("EmployeeBaseId");
 
-                    b.ToTable("CustomerAtrributeValue");
+                    b.ToTable("CustomerAtrributeValues");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAttribute", b =>
@@ -3112,7 +3321,7 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomerAttribute");
+                    b.ToTable("CustomerAttributes");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.Employee.Branch", b =>
@@ -3161,9 +3370,10 @@ namespace Identity.EntityFrameworkCore.Migrations
                         .IsUnique()
                         .HasFilter("[PartyId] IS NOT NULL");
 
-                    b.HasIndex("PartyRoleAssignmentId");
+                    b.HasIndex("PartyRoleAssignmentId")
+                        .IsUnique();
 
-                    b.ToTable("Branch");
+                    b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.Employee.EmployeeBase", b =>
@@ -3891,6 +4101,10 @@ namespace Identity.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(200)");
 
+                    b.Property<string>("NormalizedName")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
+
                     b.HasKey("Id");
 
                     b.ToTable("PartyType");
@@ -3967,6 +4181,30 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderTypes");
+                });
+
+            modelBuilder.Entity("MDM.OrderModule.Entities.ShippingType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShippingTypes");
                 });
 
             modelBuilder.Entity("MDM.PaymentModule.Entities.Receipt", b =>
@@ -4297,21 +4535,12 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("Gift");
                 });
 
-            modelBuilder.Entity("Identity.Core.Entities.Invoice", b =>
-                {
-                    b.HasOne("Identity.Core.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId");
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("Identity.Core.Entities.Order", b =>
                 {
                     b.HasOne("Identity.Core.Entities.Invoice", "Invoice")
-                        .WithOne()
+                        .WithOne("Order")
                         .HasForeignKey("Identity.Core.Entities.Order", "InvoidId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("MDM.OrderModule.Entities.OrderType", "OrderType")
@@ -4542,11 +4771,44 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("Invoice");
                 });
 
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ExtensionName", b =>
+                {
+                    b.HasOne("MDM.CatalogModule.Entity.Product.ExtensionGroup", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ExtensionValue", b =>
+                {
+                    b.HasOne("MDM.CatalogModule.Entity.Product.ExtensionName", "ExtensionName")
+                        .WithMany("Values")
+                        .HasForeignKey("ExtensionNameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExtensionName");
+                });
+
             modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ProductMedia", b =>
                 {
                     b.HasOne("Identity.Core.Entities.Product", null)
                         .WithMany("ProductMedias")
                         .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("MDM.CommonModule.Tag.TagRelated", b =>
+                {
+                    b.HasOne("MDM.CommonModule.Tag.MDMTag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.CustomerModel.BillingCustomer", b =>
@@ -4660,12 +4922,13 @@ namespace Identity.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("MDM.CustomerModule.Entity.PartyModel.PartiesBase", "Party")
                         .WithOne("Branch")
-                        .HasForeignKey("MDM.CustomerModule.Entity.Employee.Branch", "PartyId");
+                        .HasForeignKey("MDM.CustomerModule.Entity.Employee.Branch", "PartyId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MDM.CustomerModule.Entity.PartyAssignment.PartyRoleAssignment", "PartyRoleAssignment")
-                        .WithMany()
-                        .HasForeignKey("PartyRoleAssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("MDM.CustomerModule.Entity.Employee.Branch", "PartyRoleAssignmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Party");
@@ -4954,6 +5217,9 @@ namespace Identity.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Identity.Core.Entities.Invoice", b =>
                 {
+                    b.Navigation("Order")
+                        .IsRequired();
+
                     b.Navigation("ReceiptItems");
                 });
 
@@ -4989,6 +5255,11 @@ namespace Identity.EntityFrameworkCore.Migrations
             modelBuilder.Entity("Identity.Core.Entities.ProductBundle", b =>
                 {
                     b.Navigation("BundleColections");
+                });
+
+            modelBuilder.Entity("MDM.CatalogModule.Entity.Product.ExtensionName", b =>
+                {
+                    b.Navigation("Values");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.CustomerModel.CustomerBase", b =>

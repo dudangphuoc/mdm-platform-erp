@@ -1,5 +1,6 @@
 ﻿using Abp.AutoMapper;
 using MDM.CustomerModule.Entity.PartyModel;
+using System.Net.Mail;
 
 namespace MDM.CustomerModule.Models;
 

@@ -62,7 +62,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<CustomerType> CustomerTypes { get; set; }
     public DbSet<CustomerTypeGroup> CustomerTypeGroups { get; set; }
     public DbSet<CustomerAttribute> CustomerAttributes { get; set; }
-    public DbSet<CustomerAtrributeValue> CustomerAtrributeValues { get; set; }
+    public DbSet<CustomerAttributeValue> CustomerAtrributeValues { get; set; }
     public DbSet<Branch> Branches { get; set; }
     public DbSet<EmployeeBase> Employees { get; set; }
     public DbSet<EmployeeType> EmployeeTypes { get; set; }

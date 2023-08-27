@@ -23,6 +23,6 @@ namespace MDM.CustomerModule.Entity.Employee
         [ForeignKey(nameof(PartyRoleAssignmentId))]
         public PartyRoleAssignment PartyRoleAssignment { get; set; }
 
-        public ICollection<CustomerAtrributeValue> CustomerDynamicAtrributeValues { get; set; }
+        public ICollection<CustomerAttributeValue> CustomerDynamicAtrributeValues { get; set; }
     }
 }

@@ -33,5 +33,5 @@ public class EmployeeBase : MDMFullAuditedEntityBase
     [ForeignKey(nameof(TeamId))]
     public Team Team { get; set; }
 
-    public ICollection<CustomerAtrributeValue> CustomerDynamicAtrributeValues { get; set; }
+    public ICollection<CustomerAttributeValue> CustomerDynamicAtrributeValues { get; set; }
 }

@@ -17,7 +17,7 @@ namespace MDM.CustomerModule.Entity.DynamicCustomer
 
         public required EDataType DataType { get; set; }
 
-        public ICollection<CustomerAtrributeValue>? CustomerAtrributeValues { get; set; }
+        public ICollection<CustomerAttributeValue>? CustomerAtrributeValues { get; set; }
     }
 }
 

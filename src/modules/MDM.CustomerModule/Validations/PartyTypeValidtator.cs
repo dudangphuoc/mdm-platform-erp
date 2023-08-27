@@ -4,6 +4,7 @@ using FluentValidation;
 using MDM.Common;
 using MDM.CustomerModule.Entity.PartyModel;
 using MDM.CustomerModule.Models;
+using System.Xml.Linq;
 
 namespace MDM.CustomerModule.Validations;
 public class PartyTypeValidtator : AbstractValidator<CreatePartyTypeModel>
@@ -15,8 +16,10 @@ public class PartyTypeValidtator : AbstractValidator<CreatePartyTypeModel>
             using (var ioc = IocManager.Instance.ResolveAsDisposable<IRepository<PartyType, Guid>>())
             {
                 var existed = await ioc.Object.FirstOrDefaultAsync(p => p.NormalizedName == name.ToNoneSignVietnameseNormalized());
-                return existed == null;
+                return existed != null;
             }
         }).WithMessage("ERR_PARTYTYPE_NAME_EXISTED");
     }
+   
+    
 }

@@ -3254,7 +3254,35 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.ToTable("CustomerTypeGroups");
                 });
 
-            modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAtrributeValue", b =>
+            modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAttribute", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("DataType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerAttributes");
+                });
+
+            modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAttributeValue", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -3293,35 +3321,9 @@ namespace Identity.EntityFrameworkCore.Migrations
 
                     b.HasIndex("EmployeeBaseId");
 
+                    b.HasIndex("EntityId");
+
                     b.ToTable("CustomerAtrributeValues");
-                });
-
-            modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAttribute", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("DataType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomerAttributes");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.Employee.Branch", b =>
@@ -4899,7 +4901,7 @@ namespace Identity.EntityFrameworkCore.Migrations
                     b.Navigation("CustomerTypeGroup");
                 });
 
-            modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAtrributeValue", b =>
+            modelBuilder.Entity("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAttributeValue", b =>
                 {
                     b.HasOne("MDM.CustomerModule.Entity.DynamicCustomer.CustomerAttribute", "Attribute")
                         .WithMany("CustomerAtrributeValues")
@@ -4915,7 +4917,13 @@ namespace Identity.EntityFrameworkCore.Migrations
                         .WithMany("CustomerDynamicAtrributeValues")
                         .HasForeignKey("EmployeeBaseId");
 
+                    b.HasOne("MDM.CustomerModule.Entity.CustomerModel.CustomerBase", "Customer")
+                        .WithMany()
+                        .HasForeignKey("EntityId");
+
                     b.Navigation("Attribute");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("MDM.CustomerModule.Entity.Employee.Branch", b =>

@@ -2,7 +2,6 @@
 using MDM.CustomerModule.Entity.PartyModel;
 using MDM.ModuleBase;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
 
 namespace MDM.CustomerModule.Entity.PartyContact;
 

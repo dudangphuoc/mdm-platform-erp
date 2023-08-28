@@ -1,7 +1,5 @@
 ﻿using Abp.AspNetCore.Dependency;
 using Abp.Dependency;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace SelfHost.Startup
 {

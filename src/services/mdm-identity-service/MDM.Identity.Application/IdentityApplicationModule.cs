@@ -2,7 +2,7 @@
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using AuthorizationModule.Authorization.Users;
-using Identity.Application.PartyAffiliation;
+using Identity.Application.PartyAffiliationApp;
 using Identity.Core;
 using MDM.CustomerModule.Models;
 

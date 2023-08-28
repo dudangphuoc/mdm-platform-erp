@@ -74,6 +74,5 @@ namespace MDM.Identity.Html
             IocManager.Resolve<ApplicationPartManager>()
                 .AddApplicationPartsIfNotAddedBefore(typeof(IdentityHtmlModule).Assembly);
         }
-
     }
 }

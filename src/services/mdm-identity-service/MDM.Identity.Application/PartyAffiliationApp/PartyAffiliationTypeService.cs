@@ -5,7 +5,7 @@ using Abp.Linq.Extensions;
 using MDM.CustomerModule.Entity.PartyModel;
 using MDM.CustomerModule.Models;
 
-namespace Identity.Application.PartyAffiliation;
+namespace Identity.Application.PartyAffiliationApp;
 
 public class PartyAffiliationTypeService : AsyncCrudAppService<PartyAffiliationType, PartyAffiliationTypeModel, Guid, GetAllPartyAffiliationTypeModel, CreatePartyAffiliationTypeModel, UpdatePartyAffiliationTypeModel, GetPartyAffiliationTypeModel, DeletePartyAffiliationTypeModel>, IPartyAffiliationTypeService
 {

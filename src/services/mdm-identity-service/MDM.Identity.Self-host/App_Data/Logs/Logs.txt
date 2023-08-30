@@ -16613,3 +16613,266 @@ SELECT TOP(@__p_1) [b].[Id], [b].[CreationTime], [b].[CreatorUserId], [b].[IsAba
 FROM [BackgroundJobs] AS [b]
 WHERE [b].[IsAbandoned] = CAST(0 AS bit) AND [b].[NextTryTime] <= @__Now_0
 ORDER BY [b].[Priority] DESC, [b].[TryCount], [b].[NextTryTime]
+DEBUG 2023-08-30 14:33:41,172 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2023-08-30 14:33:41,528 [1    ] Abp.Modules.AbpModuleManager             - Found 25 ABP modules in total.
+DEBUG 2023-08-30 14:33:41,585 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: SelfHost.Startup.SelfHostModule, MDM.Identity.Host, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,588 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.Identity.Html.IdentityHtmlModule, MDM.Identity.Html, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,590 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Identity.Application.IdentityApplicationModule, MDM.Identity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,590 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Identity.Core.IdentityCoreModule, MDM.Identity.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,591 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.AuthorizationModule.AuthorizationModule, MDM.AuthorizationModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,592 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCoreModule, Abp.ZeroCore, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,592 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.AbpZeroCommonModule, Abp.Zero.Common, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,592 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,593 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Zero.EntityFrameworkCore.AbpZeroCoreEntityFrameworkCoreModule, Abp.ZeroCore.EntityFrameworkCore, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,593 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule, Abp.EntityFrameworkCore, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,594 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkCommonModule, Abp.EntityFramework.Common, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,594 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.ModuleBase.MDMModuleBase, MDM.ModuleBase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,594 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.Shared.MDMSharedModule, MDM.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,595 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDMPlatform.MDMPlatformCoreModule, MDMPlatform.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,596 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.CatalogModule.CatalogModule, MDM.CatalogModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,597 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.CommonModule.CommonModule, MDM.CommonModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,598 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.CustomerModule.CustomerModule, MDM.CustomerModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,599 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.OrderModule.OrderModule, MDM.OrderModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,599 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: MDM.PaymentModule.PaymentModule, MDM.PaymentModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,600 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AutoMapper.AbpAutoMapperModule, Abp.AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,602 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Identity.EntityFrameworkCore.IdentityEntityFrameworkModule, MDM.Identity.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,603 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Identity.EntityFrameworkCore.MDMEntityFrameworkModule, MDMPlatform.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,603 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.AbpAspNetCoreModule, Abp.AspNetCore, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,604 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,604 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AspNetCore.SignalR.AbpAspNetCoreSignalRModule, Abp.AspNetCore.SignalR, Version=8.1.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:41,607 [1    ] Abp.Modules.AbpModuleManager             - 25 modules loaded.
+DEBUG 2023-08-30 14:33:41,785 [1    ] o.Configuration.LanguageManagementConfig - Converted Abp (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2023-08-30 14:33:41,785 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpZero (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2023-08-30 14:33:41,785 [1    ] o.Configuration.LanguageManagementConfig - Converted AuthorizationModule (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2023-08-30 14:33:41,785 [1    ] o.Configuration.LanguageManagementConfig - Converted AbpWeb (Abp.Localization.Dictionaries.DictionaryBasedLocalizationSource) to MultiTenantLocalizationSource
+DEBUG 2023-08-30 14:33:42,448 [1    ] ameworkCore.AbpEntityFrameworkCoreModule - Registering DbContext: Identity.EntityFrameworkCore.IdentityDbContext, MDM.Identity.EntityFrameworkCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2023-08-30 14:33:43,334 [1    ] Abp.Localization.LocalizationManager     - Initializing 4 localization sources.
+DEBUG 2023-08-30 14:33:43,407 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2023-08-30 14:33:43,422 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpZero
+DEBUG 2023-08-30 14:33:43,422 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AuthorizationModule
+DEBUG 2023-08-30 14:33:43,426 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2023-08-30 14:33:43,438 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2023-08-30 14:33:43,451 [1    ] , Culture=neutral, PublicKeyToken=null]] - Start background worker: Abp.Authorization.Users.UserTokenExpirationWorker`2[[AuthorizationModule.MultiTenancy.Tenant, MDM.AuthorizationModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[AuthorizationModule.Authorization.Users.User, MDM.AuthorizationModule, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+DEBUG 2023-08-30 14:33:43,503 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Found 28 classes define auto mapping attributes
+DEBUG 2023-08-30 14:33:43,504 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Identity.Html.Models.TokenAuth.ExternalLoginProviderInfoModel
+DEBUG 2023-08-30 14:33:43,509 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Identity.Application.ContactMethodApp.UpdateContactMethodTypeModel
+DEBUG 2023-08-30 14:33:43,510 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Identity.Application.ContactMethodApp.CreateContactMethodTypeModel
+DEBUG 2023-08-30 14:33:43,510 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - Identity.Application.ContactMethodApp.ContactMethodTypeModel
+DEBUG 2023-08-30 14:33:43,511 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.Users.CreateUserDto
+DEBUG 2023-08-30 14:33:43,511 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.Users.UserDto
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.Sessions.TenantLoginInfoDto
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.Sessions.UserLoginInfoDto
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.AuthorizationModule.PermissionDto
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.MultiTenancy.CreateTenantDto
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - AuthorizationModule.DataTransferObject.MultiTenancy.TenantDto
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.CreatePartyAffiliationTypeModel
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.CreatePartyIdentificationTypeModel
+DEBUG 2023-08-30 14:33:43,512 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.CreatePartyRoleTypeModel
+DEBUG 2023-08-30 14:33:43,513 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.CreatePartyTypeModel
+DEBUG 2023-08-30 14:33:43,513 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.CustomerSegmentDetailModel
+DEBUG 2023-08-30 14:33:43,513 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.EmployeeTypeModel
+DEBUG 2023-08-30 14:33:43,513 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyAffiliationTypeModel
+DEBUG 2023-08-30 14:33:43,513 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyIdentificationTypeModel
+DEBUG 2023-08-30 14:33:43,513 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyModel
+DEBUG 2023-08-30 14:33:43,514 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyRoleAssignmentModel
+DEBUG 2023-08-30 14:33:43,514 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyRoleModel
+DEBUG 2023-08-30 14:33:43,515 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyRoleTypeModel
+DEBUG 2023-08-30 14:33:43,515 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.PartyTypeModel
+DEBUG 2023-08-30 14:33:43,515 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.UpdatePartyAffiliationTypeModel
+DEBUG 2023-08-30 14:33:43,515 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.UpdatePartyIdentificationTypeModel
+DEBUG 2023-08-30 14:33:43,515 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.UpdatePartyRoleTypeModel
+DEBUG 2023-08-30 14:33:43,515 [1    ] Abp.AutoMapper.AbpAutoMapperModule       - MDM.CustomerModule.Models.UpdatePartyTypeModel
+WARN  2023-08-30 14:33:44,494 [1    ] Microsoft.EntityFrameworkCore.Model      - Navigations 'Invoice.Order' and 'Order.Invoice' were separated into two relationships since the [ForeignKey] attribute was specified on navigations on both sides.
+WARN  2023-08-30 14:33:44,990 [1    ] oft.EntityFrameworkCore.Model.Validation - Entity 'ProductBundle' has a global query filter defined and is the required end of a relationship with the entity 'ProductBundleColection'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+WARN  2023-08-30 14:33:44,992 [1    ] oft.EntityFrameworkCore.Model.Validation - Entity 'Category' has a global query filter defined and is the required end of a relationship with the entity 'ProductCategory'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+WARN  2023-08-30 14:33:44,994 [1    ] oft.EntityFrameworkCore.Model.Validation - Entity 'Gift' has a global query filter defined and is the required end of a relationship with the entity 'ProductGift'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+WARN  2023-08-30 14:33:44,997 [1    ] oft.EntityFrameworkCore.Model.Validation - Entity 'MDMTag' has a global query filter defined and is the required end of a relationship with the entity 'TagRelated'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+WARN  2023-08-30 14:33:44,998 [1    ] oft.EntityFrameworkCore.Model.Validation - Entity 'EmployeeBase' has a global query filter defined and is the required end of a relationship with the entity 'TeamHistory'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+WARN  2023-08-30 14:33:45,032 [1    ] oft.EntityFrameworkCore.Model.Validation - The property 'PartyRoleAssignment.Source' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+WARN  2023-08-30 14:33:45,086 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'TotalAmount' on entity type 'Invoice'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,088 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'DiscountAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,089 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'OrderTotal' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,091 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'SubTotal' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,092 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'SubTotalWithDiscount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,094 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'TaxAmount' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,097 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'DiscountAmount' on entity type 'OrderLine'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,100 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'Quantity' on entity type 'OrderLine'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,102 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'UnitPrice' on entity type 'OrderLine'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,104 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,105 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'SalePrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,107 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'TotalAmount' on entity type 'ReceiptItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,109 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'RemainingAmount' on entity type 'Receipt'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,111 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'TotalAmount' on entity type 'Receipt'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+WARN  2023-08-30 14:33:45,114 [1    ] oft.EntityFrameworkCore.Model.Validation - No store type was specified for the decimal property 'TotalReceived' on entity type 'Receipt'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+INFO  2023-08-30 14:33:45,967 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [e].[Id], [e].[CreationTime], [e].[CreatorUserId], [e].[DeleterUserId], [e].[DeletionTime], [e].[DisplayName], [e].[IsDeleted], [e].[LastModificationTime], [e].[LastModifierUserId], [e].[Name]
+FROM [Editions] AS [e]
+WHERE [e].[Name] = N'Standard'
+INFO  2023-08-30 14:33:46,099 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (28ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,110 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,116 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,122 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,129 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,137 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,144 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,151 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,158 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,165 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,172 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,178 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,187 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__language_Name_1='?' (Size = 128)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Languages] AS [l]
+        WHERE ([l].[TenantId] IS NULL) AND [l].[Name] = @__language_Name_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,204 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[CreationTime], [r].[CreatorUserId], [r].[DeleterUserId], [r].[DeletionTime], [r].[Description], [r].[DisplayName], [r].[IsDefault], [r].[IsDeleted], [r].[IsStatic], [r].[LastModificationTime], [r].[LastModifierUserId], [r].[Name], [r].[NormalizedName], [r].[TenantId]
+FROM [Roles] AS [r]
+WHERE ([r].[TenantId] IS NULL) AND [r].[Name] = N'Admin'
+INFO  2023-08-30 14:33:46,270 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (8ms) [Parameters=[@__adminRoleForHost_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [p].[Name]
+FROM [Permissions] AS [p]
+WHERE [p].[Discriminator] = N'RolePermissionSetting' AND ([p].[TenantId] IS NULL) AND [p].[RoleId] = @__adminRoleForHost_Id_0
+INFO  2023-08-30 14:33:46,286 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[AuthenticationSource], [u].[ConcurrencyStamp], [u].[CreationTime], [u].[CreatorUserId], [u].[DeleterUserId], [u].[DeletionTime], [u].[EmailAddress], [u].[EmailConfirmationCode], [u].[IsActive], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsLockoutEnabled], [u].[IsPhoneNumberConfirmed], [u].[IsTwoFactorEnabled], [u].[LastModificationTime], [u].[LastModifierUserId], [u].[LockoutEndDateUtc], [u].[Name], [u].[NormalizedEmailAddress], [u].[NormalizedUserName], [u].[Password], [u].[PasswordResetCode], [u].[PhoneNumber], [u].[SecurityStamp], [u].[Surname], [u].[TenantId], [u].[UserName]
+FROM [Users] AS [u]
+WHERE ([u].[TenantId] IS NULL) AND [u].[UserName] = N'admin'
+INFO  2023-08-30 14:33:46,377 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Settings] AS [s]
+        WHERE [s].[Name] = @__name_0 AND ([s].[TenantId] IS NULL) AND ([s].[UserId] IS NULL)) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,384 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Settings] AS [s]
+        WHERE [s].[Name] = @__name_0 AND ([s].[TenantId] IS NULL) AND ([s].[UserId] IS NULL)) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,392 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__name_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Settings] AS [s]
+        WHERE [s].[Name] = @__name_0 AND ([s].[TenantId] IS NULL) AND ([s].[UserId] IS NULL)) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+INFO  2023-08-30 14:33:46,456 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[ConnectionString], [t].[CreationTime], [t].[CreatorUserId], [t].[DeleterUserId], [t].[DeletionTime], [t].[EditionId], [t].[IsActive], [t].[IsDeleted], [t].[LastModificationTime], [t].[LastModifierUserId], [t].[Name], [t].[TenancyName]
+FROM [Tenants] AS [t]
+WHERE [t].[TenancyName] = N'Default'
+INFO  2023-08-30 14:33:46,500 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@___tenantId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[CreationTime], [r].[CreatorUserId], [r].[DeleterUserId], [r].[DeletionTime], [r].[Description], [r].[DisplayName], [r].[IsDefault], [r].[IsDeleted], [r].[IsStatic], [r].[LastModificationTime], [r].[LastModifierUserId], [r].[Name], [r].[NormalizedName], [r].[TenantId]
+FROM [Roles] AS [r]
+WHERE [r].[TenantId] = @___tenantId_0 AND [r].[Name] = N'Admin'
+INFO  2023-08-30 14:33:46,510 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@___tenantId_0='?' (DbType = Int32), @__adminRole_Id_1='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [p].[Name]
+FROM [Permissions] AS [p]
+WHERE [p].[Discriminator] = N'RolePermissionSetting' AND [p].[TenantId] = @___tenantId_0 AND [p].[RoleId] = @__adminRole_Id_1
+INFO  2023-08-30 14:33:46,525 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (7ms) [Parameters=[@___tenantId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[AuthenticationSource], [u].[ConcurrencyStamp], [u].[CreationTime], [u].[CreatorUserId], [u].[DeleterUserId], [u].[DeletionTime], [u].[EmailAddress], [u].[EmailConfirmationCode], [u].[IsActive], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsLockoutEnabled], [u].[IsPhoneNumberConfirmed], [u].[IsTwoFactorEnabled], [u].[LastModificationTime], [u].[LastModifierUserId], [u].[LockoutEndDateUtc], [u].[Name], [u].[NormalizedEmailAddress], [u].[NormalizedUserName], [u].[Password], [u].[PasswordResetCode], [u].[PhoneNumber], [u].[SecurityStamp], [u].[Surname], [u].[TenantId], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[TenantId] = @___tenantId_0 AND [u].[UserName] = N'admin'
+INFO  2023-08-30 14:33:46,641 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@__ef_filter__p_0='?' (DbType = Boolean), @__ef_filter__p_1='?' (DbType = Boolean)], CommandType='Text', CommandTimeout='30']
+SELECT [l].[Id], [l].[CreationTime], [l].[CreatorUserId], [l].[DeleterUserId], [l].[DeletionTime], [l].[DisplayName], [l].[Icon], [l].[IsDeleted], [l].[IsDisabled], [l].[LastModificationTime], [l].[LastModifierUserId], [l].[Name], [l].[TenantId]
+FROM [Languages] AS [l]
+WHERE (@__ef_filter__p_0 = CAST(1 AS bit) OR [l].[IsDeleted] = CAST(0 AS bit)) AND (@__ef_filter__p_1 = CAST(1 AS bit) OR ([l].[TenantId] IS NULL))
+INFO  2023-08-30 14:33:46,756 [1    ] oft.EntityFrameworkCore.Database.Command - Executed DbCommand (5ms) [Parameters=[@__ef_filter__p_0='?' (DbType = Boolean)], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[CreationTime], [s].[CreatorUserId], [s].[LastModificationTime], [s].[LastModifierUserId], [s].[Name], [s].[TenantId], [s].[UserId], [s].[Value]
+FROM [Settings] AS [s]
+WHERE (@__ef_filter__p_0 = CAST(1 AS bit) OR ([s].[TenantId] IS NULL)) AND ([s].[UserId] IS NULL) AND ([s].[TenantId] IS NULL)
+INFO  2023-08-30 14:33:46,790 [1    ] tCore.Builder.RequestLocalizationOptions - Supported Request Localization Cultures: en,es-MX,fr,de,it,nl,pt-BR,tr,ru,ar,fa,ja,zh-Hans
+WARN  2023-08-30 14:33:47,130 [1    ] Microsoft.AspNetCore.Server.Kestrel      - Overriding address(es) 'https://localhost:7271, http://localhost:5054'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+INFO  2023-08-30 14:33:47,154 [1    ] Microsoft.AspNetCore.Server.Kestrel      - Unable to bind to http://localhost:80 on the IPv4 loopback interface: 'An attempt was made to access a socket in a way forbidden by its access permissions.'.
+INFO  2023-08-30 14:33:47,157 [1    ] Microsoft.AspNetCore.Server.Kestrel      - Unable to bind to http://localhost:80 on the IPv6 loopback interface: 'An attempt was made to access a socket in a way forbidden by its access permissions.'.

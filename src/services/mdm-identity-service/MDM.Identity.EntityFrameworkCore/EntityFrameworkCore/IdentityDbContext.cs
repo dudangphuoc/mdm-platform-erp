@@ -116,7 +116,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
         {
             entity.Property(b => b.Source).HasConversion(
                                    v => string.Join(',', v),
-                                                      v => v.Split(',', System.StringSplitOptions.RemoveEmptyEntries));
+                                                      v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         });
         builder.Entity<PartyAffiliation>(b =>
         {

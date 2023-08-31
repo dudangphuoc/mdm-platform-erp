@@ -44,6 +44,12 @@ namespace MDM.Identity.Html
             // Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
+
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(MDM.AuthorizationModule.AuthorizationModule).GetAssembly()
+                 );
+
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
                      typeof(IdentityApplicationModule).GetAssembly()

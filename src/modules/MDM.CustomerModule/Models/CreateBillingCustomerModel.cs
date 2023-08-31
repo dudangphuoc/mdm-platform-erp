@@ -1,5 +1,6 @@
 ﻿using Abp.AutoMapper;
 using FluentValidation;
+using MDM.Common.Validations;
 using MDM.CustomerModule.Entity.CustomerModel;
 
 namespace MDM.CustomerModule.Models;

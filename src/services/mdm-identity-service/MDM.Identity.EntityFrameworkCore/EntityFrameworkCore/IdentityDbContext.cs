@@ -62,7 +62,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<CustomerType> CustomerTypes { get; set; }
     public DbSet<CustomerTypeGroup> CustomerTypeGroups { get; set; }
     public DbSet<CustomerAttribute> CustomerAttributes { get; set; }
-    public DbSet<CustomerAtrributeValue> CustomerAtrributeValues { get; set; }
+    public DbSet<CustomerAttributeValue> CustomerAtrributeValues { get; set; }
     public DbSet<Branch> Branches { get; set; }
     public DbSet<EmployeeBase> Employees { get; set; }
     public DbSet<EmployeeType> EmployeeTypes { get; set; }
@@ -112,12 +112,10 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
 
     public void ConfigureBaseService(ModelBuilder builder)
     {
-        builder.Entity<PartyRoleAssignment>(entity =>
-        {
-            entity.Property(b => b.Source).HasConversion(
-                                   v => string.Join(',', v),
-                                                      v => v.Split(',', System.StringSplitOptions.RemoveEmptyEntries));
-        });
+        //builder.Entity<PartyRoleAssignment>(entity =>
+        //{
+        //    entity.Property(b => b.Source).HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+        //});
         builder.Entity<PartyAffiliation>(b =>
         {
             b.HasOne<PartiesBase>(s => s.Party)

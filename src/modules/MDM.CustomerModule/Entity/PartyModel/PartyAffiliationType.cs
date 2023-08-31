@@ -9,8 +9,8 @@ namespace MDM.CustomerModule.Entity.PartyModel;
 public class PartyAffiliationType : CreationAuditedEntity<Guid>
 {
     [Column(TypeName = "nvarchar(200)")]
-    public string Name { get; set; }
-
+    public string Name { get; set; }                  
+    
     [Column(TypeName = "nvarchar(200)")]
     public string? Description { get; set; }
 }

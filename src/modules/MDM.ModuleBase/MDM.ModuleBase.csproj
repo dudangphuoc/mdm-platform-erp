@@ -1,19 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Abp.AutoMapper" Version="8.1.0" />
-    <PackageReference Include="Abp.FluentValidation" Version="8.1.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Abp.AutoMapper" Version="8.1.0" />
+		<PackageReference Include="Abp.FluentValidation" Version="8.1.0" />
+		<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="6.13.18" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\library\MDM.Common\MDM.Common.csproj" />
-    <ProjectReference Include="..\..\library\MDM.Shared\MDM.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\library\MDM.Common\MDM.Common.csproj" />
+		<ProjectReference Include="..\..\library\MDM.Shared\MDM.Shared.csproj" />
+	</ItemGroup>
 
 </Project>

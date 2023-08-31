@@ -8,6 +8,7 @@ using Abp.Json;
 using AuthorizationModule.Identity;
 using Castle.Facilities.Logging;
 using MDMPlatform.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -161,13 +162,14 @@ namespace SelfHost.Startup
                 bool canShowSummaries = _appConfiguration.GetValue<bool>("Swagger:ShowSummaries");
                 if (canShowSummaries)
                 {
-                    var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                    var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
-
-
+                    foreach (string file in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.xml"))
+                    {
+                        options.IncludeXmlComments(file);
+                    }
+                    //var hostXmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    //var hostXmlPath = Path.Combine(AppContext.BaseDirectory, hostXmlFile);
                     //new List<XDocument>
                     //{
-
                     //    XDocument.Load(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")),
                     //    XDocument.Load(Path.Combine(AppContext.BaseDirectory, $"Identity.Application.xml")),
                     //    XDocument.Load(Path.Combine(AppContext.BaseDirectory, $"Identity.Web.Core.xml"))

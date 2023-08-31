@@ -2466,6 +2466,11 @@ namespace Identity.EntityFrameworkCore.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_CustomerAtrributeValues_Customers_EntityId",
+                        column: x => x.EntityId,
+                        principalTable: "Customers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_CustomerAtrributeValues_Employee_EmployeeBaseId",
                         column: x => x.EmployeeBaseId,
                         principalTable: "Employee",
@@ -2573,6 +2578,11 @@ namespace Identity.EntityFrameworkCore.Migrations
                 name: "IX_CustomerAtrributeValues_EmployeeBaseId",
                 table: "CustomerAtrributeValues",
                 column: "EmployeeBaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerAtrributeValues_EntityId",
+                table: "CustomerAtrributeValues",
+                column: "EntityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_CustomerTypeId",

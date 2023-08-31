@@ -1,4 +1,8 @@
-﻿using MDM.Common.EntityFactory;
+﻿using Abp.AutoMapper;
+using Abp.Dependency;
+using Abp.Domain.Entities;
+using Abp.Domain.Repositories;
+using MDM.Common.EntityFactory;
 using MDM.CustomerModule.Entity.PartyContact;
 using MDM.CustomerModule.Entity.PartyModel;
 using MDM.ModuleBase;
@@ -12,6 +16,8 @@ public class PartyRoleAssignment : MDMFullAuditedEntityBase
 {
     public Guid PartyId { get; set; }
 
+    public Guid SourceId { get; set; }
+
     public Guid PartyRoleTypeId { get; set; }
 
     public DateTime EffectiveDate { get; set; }
@@ -19,7 +25,7 @@ public class PartyRoleAssignment : MDMFullAuditedEntityBase
     public DateTime? ExpirationDate { get; set; }
 
     //CustomerBase | EmployeeBase | Supplier | Branch
-    public string[] Source { get; set; }
+    public string Source { get; set; }
 
     [ForeignKey(nameof(PartyId))]
     public PartiesBase Party { get; set; }
@@ -28,13 +34,18 @@ public class PartyRoleAssignment : MDMFullAuditedEntityBase
     public PartyRoleType PartyRoleType { get; set; }
 
     public ICollection<PartyContactMethod> PartyContactMethods { get; set; }
+}
 
-    /// <summary>
-    /// Get source of PartyRoleAssignment
-    /// </summary>
-    /// <returns>IQueryable</returns>
-    public virtual IQueryable GetSource()
+[AutoMap(typeof(PartyRoleAssignment))]
+public class PartyRoleAssignmentMapper : PartyRoleAssignment
+{
+    public object? SourceData { get; set; }
+
+    public void GetSourceData<TEntity, TPrimaryKey>(TPrimaryKey id) where TEntity : Entity<TPrimaryKey>
     {
-        return null;
+        using (var repo = IocManager.Instance.ResolveAsDisposable<IRepository<TEntity, TPrimaryKey>>())
+        {
+            SourceData = repo.Object.FirstOrDefault(id);
+        }
     }
 }

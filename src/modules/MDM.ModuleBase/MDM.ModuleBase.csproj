@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<PackageReference Include="Abp.AutoMapper" Version="8.1.0" />
 		<PackageReference Include="Abp.FluentValidation" Version="8.1.0" />
+		<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="6.13.18" />
 	</ItemGroup>
 
 	<ItemGroup>

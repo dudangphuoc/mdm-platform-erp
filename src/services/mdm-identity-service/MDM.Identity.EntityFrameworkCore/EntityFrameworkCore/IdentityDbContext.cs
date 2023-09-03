@@ -83,7 +83,9 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<PersonBase> PersonBases { get; set; }
     public DbSet<OrderType> OrderTypes { get; set; }
     public DbSet<ShippingType> ShippingTypes { get; set; }
-    public DbSet<Receipt> Receipts { get; set; } 
+    public DbSet<Receipt> Receipts { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
+    
     #endregion
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -95,10 +97,10 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     {
         base.OnModelCreating(modelBuilder);
 
-        foreach (var type in RegisterDbSet.ShouldHasAttribute(typeof(IdentityCoreModule).GetAssembly()))
-        {
-            modelBuilder.Entity(type);
-        }
+        //foreach (var type in RegisterDbSet.ShouldHasAttribute(typeof(IdentityCoreModule).GetAssembly()))
+        //{
+        //    modelBuilder.Entity(type);
+        //}
 
         modelBuilder.ChangeAbpTablePrefix<Tenant, Role, User>("");
         modelBuilder.ConfigureBaseService();
@@ -116,9 +118,12 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
         //{
         //    entity.Property(b => b.Source).HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         //});
+
+        builder.Entity<Parties>().ToTable("Parties");
+
         builder.Entity<PartyAffiliation>(b =>
         {
-            b.HasOne<PartiesBase>(s => s.Party)
+            b.HasOne(s => s.Party)
              .WithMany(p => p.PartyAffiliations);
             b.HasOne(p => p.SubParty)
                 .WithMany(p => p.SubPartyAffiliations)
@@ -126,7 +131,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
         });
 
         builder.Entity<CustomerBase>()
-        .HasOne<PartyRoleAssignment>(s => s.PartyRoleAssignment)
+        .HasOne(s => s.PartyRoleAssignment)
         .WithOne()
         .OnDelete(DeleteBehavior.NoAction);
 
@@ -195,7 +200,5 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
         builder.Entity<Invoice>(p => {
             p.HasOne(x => x.Order).WithOne(x => x.Invoice).OnDelete(DeleteBehavior.NoAction);
         });
-
-
     }
 }

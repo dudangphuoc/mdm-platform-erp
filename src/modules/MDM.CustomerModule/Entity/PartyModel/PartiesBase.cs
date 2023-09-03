@@ -11,8 +11,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MDM.CustomerModule.Entity.PartyModel;
 
 
-[Table("Parties")]
-public class PartiesBase : MDMFullAuditedEntityBase, IPassivable
+
+public abstract class PartiesBase : MDMFullAuditedEntityBase, IPassivable
 {
     public Guid PartyTypeId { get; set; }
 

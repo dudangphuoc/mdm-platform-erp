@@ -64,6 +64,7 @@ public class PartyTypeService : AsyncCrudAppService<PartyType, PartyTypeModel, G
     [AllowAnonymous]
     public override Task<PartyTypeModel> CreateAsync(CreatePartyTypeModel input)
     {
+
         return base.CreateAsync(input);
     }
 }

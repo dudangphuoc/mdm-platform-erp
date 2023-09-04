@@ -11,7 +11,15 @@ public class PartyContactMethod : MDMFullAuditedEntityBase
 {
     public Guid PartyRoleAssignmentId { get; set; }
 
-    public Guid PartyContactTypeId { get; set; }
+    public Guid? PartyContactTypeId { get; set; }
+
+    public Guid? EmailId { get; set; }
+
+    public Guid? AddressId { get; set; }
+
+    public Guid? TelephoneId { get; set; }
+
+    public Guid? WebsiteId { get; set; }
 
     [Column(TypeName = "nvarchar(500)")]
     public string ContactName { get; set; }
@@ -28,11 +36,15 @@ public class PartyContactMethod : MDMFullAuditedEntityBase
 
     public PartyContactType ContactMethodType { get; set; }
 
-    public ICollection<Email> Emails { get; set; }
+    [ForeignKey(nameof(EmailId))]
+    public Email? Email { get; set; }
 
-    public ICollection<Address> Addresses { get; set; }
+    [ForeignKey(nameof(AddressId))]
+    public Address? Address { get; set; }
 
-    public ICollection<TelePhone> TelePhones { get; set; }
+    [ForeignKey(nameof(TelephoneId))]
+    public TelePhone? TelePhone { get; set; }
 
-    public ICollection<Website> Websites { get; set; }
+    [ForeignKey(nameof(WebsiteId))]
+    public Website? Website { get; set; }
 }

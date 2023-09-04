@@ -6,6 +6,8 @@ using MDM.CustomerModule.Entity.PartyModel;
 using MDM.CustomerModule.Entity.Person;
 using MDM.CustomerModule.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.IO;
 using System.Linq.Expressions;
 
 namespace MDM.CustomerModule.CustomerManager;
@@ -31,11 +33,21 @@ public class CustomerStoreBase : ICustomerStoreBase, ITransientDependency
             x => x.PartyType,
             x => x.PartyIdentification,
             x => x.Customer,
-            x => x.Customer.PartyRoleAssignment,
-            x => x.Person)
-           .Where(x => x.Person.Name.Contains(input.Name.ToUpper().Trim()) && x.PartyRoleAssignments.Count > 0)
+            x => x.Customer.PartyRoleAssignment)
+           .Where(x => x.PartyRoleAssignments.Count > 0)
            .WhereIf(input.IsActive.HasValue, p => p.IsActive == input.IsActive);
 
+        if (!string.IsNullOrEmpty(input.Name))
+        {
+            var personQuery = PersonRepository.GetAll().Where(x => x.Name.Contains(input.Name.ToUpper().Trim()));
+            var resultQuery = from parties in partiesQuery
+                              join tPerson in personQuery on parties.Id equals tPerson.Id into t2
+                              from person in t2.DefaultIfEmpty()
+                              select parties;
+
+            return resultQuery;
+        }
+     
         return partiesQuery;
     }
 

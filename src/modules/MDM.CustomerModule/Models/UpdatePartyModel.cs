@@ -1,23 +1,22 @@
-﻿using MDM.ModuleBase;
+﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using MDM.CustomerModule.Entity.PartyModel;
+using MDM.ModuleBase;
 
 namespace MDM.CustomerModule.Models;
 
-public class CreatePartyModel
+[AutoMap(typeof(PartiesBase))]
+public class UpdatePartyModel : IEntityDto<Guid>
 {
-    /// <summary>        
-    /// Id loại party.
-    /// </summary>
-    public Guid? PartyTypeId { get; set; }
-
-    /// <summary>        
-    /// Loại role party.
-    /// </summary>
-    public Guid? PartyRoleTypeId { get; set; }
-
     /// <summary>        
     /// Loại khách hàng (customer, agent...).
     /// </summary>
     public Guid? CustomerTypeId { get; set; }
+
+    /// <summary>        
+    /// Loại role party (thực thể/ đối tượng).
+    /// </summary>
+    public Guid? PartyRoleTypeId { get; set; }
 
     /// <summary>        
     /// Loại nhân viên (cs, cước, sales...).
@@ -95,8 +94,12 @@ public class CreatePartyModel
     public string? AddressLine { get; set; }
 
     /// <summary>
+    /// Id party (thực thể/ đối tượng).
+    /// </summary>
+    public Guid Id { get; set; }
+
+    /// <summary>
     /// Danh sách property dynamic.
     /// </summary>
     //public List<CreateAtttributeModel>? Attributes { get; set; }
 }
-

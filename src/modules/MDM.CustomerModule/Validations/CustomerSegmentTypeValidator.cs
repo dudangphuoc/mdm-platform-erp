@@ -2,11 +2,6 @@
 using Abp.Domain.Repositories;
 using FluentValidation;
 using MDM.CustomerModule.Entity.CustomerModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MDM.CustomerModule.Validations;
 

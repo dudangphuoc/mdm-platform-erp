@@ -27,9 +27,6 @@ public class PartyRoleAssignment : MDMFullAuditedEntityBase
     //CustomerBase | EmployeeBase | Supplier | Branch
     public string Source { get; set; }
 
-    [ForeignKey(nameof(PartyId))]
-    public PartiesBase Party { get; set; }
-
     [ForeignKey(nameof(PartyRoleTypeId))]
     public PartyRoleType PartyRoleType { get; set; }
 
@@ -40,6 +37,9 @@ public class PartyRoleAssignment : MDMFullAuditedEntityBase
 public class PartyRoleAssignmentMapper : PartyRoleAssignment
 {
     public object? SourceData { get; set; }
+
+    [ForeignKey(nameof(PartyId))]
+    public PartiesBase Party { get; set; }
 
     public void GetSourceData<TEntity, TPrimaryKey>(TPrimaryKey id) where TEntity : Entity<TPrimaryKey>
     {

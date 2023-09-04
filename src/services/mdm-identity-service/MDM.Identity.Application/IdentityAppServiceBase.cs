@@ -1,11 +1,13 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Entities;
+using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Abp.IdentityFramework;
 using Abp.Runtime.Session;
 using AuthorizationModule.Authorization.Users;
 using AuthorizationModule.MultiTenancy;
+using MDM.CustomerModule.Entity.PartyContact;
 using MDM.Shared.AuthorizationModule;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,6 +15,7 @@ namespace Identity.Application
 {
     public class IdentityAppServiceBase : ApplicationService
     {
+    protected IRepository<PartyIdentificationType, Guid> PartyIdentificationTypeRepository;
         public TenantManager TenantManager { get; set; }
 
         public UserManager UserManager { get; set; }

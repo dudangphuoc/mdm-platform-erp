@@ -1,5 +1,4 @@
 ﻿using Abp.Domain.Entities;
-using MDM.Common.EntityFactory;
 using MDM.CustomerModule.Entity.CustomerModel;
 using MDM.CustomerModule.Entity.Employee;
 using MDM.CustomerModule.Entity.PartyAssignment;
@@ -10,9 +9,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MDM.CustomerModule.Entity.PartyModel;
 
-
-
-public abstract class PartiesBase : MDMFullAuditedEntityBase, IPassivable
+[Table("Parties")]
+public class PartiesBase : MDMFullAuditedEntityBase, IPassivable
 {
     public Guid PartyTypeId { get; set; }
 
@@ -33,8 +31,6 @@ public abstract class PartiesBase : MDMFullAuditedEntityBase, IPassivable
     public PartyType PartyType { get; set; }
 
     public Supplier Supplier { get; set; }
-
-    public PersonBase Person { get; set; }
 
     public PartyIdentification? PartyIdentification { get; set; }
 

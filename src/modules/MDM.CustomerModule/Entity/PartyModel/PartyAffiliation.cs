@@ -8,7 +8,6 @@ namespace MDM.CustomerModule.Entity.PartyModel;
 [Table("PartyAffiliations")]
 public class PartyAffiliation : MDMFullAuditedEntityBase
 {
-    
     public Guid PartyId { get; set; }
 
     public Guid SubPartyId { get; set; }

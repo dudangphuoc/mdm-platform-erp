@@ -20,6 +20,7 @@ using MDM.CustomerModule.Entity.Person;
 using MDM.OrderModule.Entities;
 using MDM.PaymentModule.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Identity.EntityFrameworkCore;
 
@@ -32,7 +33,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<Invoice> Invoices { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderLine> OrderLines { get; set; }
-    public DbSet<Parties> Parties { get; set; }
+    public DbSet<PartiesBase> Parties { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Price> Prices { get; set; }
     public DbSet<PriceList> PriceLists { get; set; }
@@ -56,7 +57,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<MDMTag> MDMTags { get; set; }
     public DbSet<TagRelated> TagRelateds { get; set; }
     public DbSet<BillingCustomer> BillingCustomers { get; set; }
-    public DbSet<CustomerBase> Customers { get; set; }
+    public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerSegment> CustomerSegments { get; set; }
     public DbSet<CustomerSegmentType> CustomerSegmentTypes { get; set; }
     public DbSet<CustomerType> CustomerTypes { get; set; }
@@ -76,6 +77,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<PartyContactMethod> PartyContactMethods { get; set; }
     public DbSet<PartyContactType> PartyContactTypes { get; set; }
     public DbSet<PartyIdentification> PartyIdentifications { get; set; }
+    public DbSet<PartyIdentificationType> PartyIdentificationTypes { get; set; }
     public DbSet<TelePhone> TelePhones { get; set; }
     public DbSet<Website> Websites { get; set; }
     public DbSet<PartyAffiliation> PartyAffiliations { get; set; }
@@ -85,7 +87,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
     public DbSet<ShippingType> ShippingTypes { get; set; }
     public DbSet<Receipt> Receipts { get; set; }
     public DbSet<Organization> Organizations { get; set; }
-    
+
     #endregion
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -118,8 +120,15 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
         //{
         //    entity.Property(b => b.Source).HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
         //});
-
-        builder.Entity<Parties>().ToTable("Parties");
+        ///Sequence
+        builder.HasSequence<int>("CustomerCodes").StartsAt(10000).IncrementsBy(1);
+        builder.HasSequence<int>("OrderCodes").StartsAt(10000).IncrementsBy(1);
+        builder.HasSequence<int>("PaymentCodes").StartsAt(10000).IncrementsBy(1);
+        ///Sequence
+        builder.Entity<PartiesBase>(b => { 
+            b.HasOne(x => x.Customer).WithOne(x => x.Party).OnDelete(DeleteBehavior.NoAction);
+           
+        });
 
         builder.Entity<PartyAffiliation>(b =>
         {
@@ -130,13 +139,26 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
                 .OnDelete(DeleteBehavior.NoAction);
         });
 
-        builder.Entity<CustomerBase>()
+        builder.Entity<Customer>()
         .HasOne(s => s.PartyRoleAssignment)
         .WithOne()
         .OnDelete(DeleteBehavior.NoAction);
+        
+        builder.Entity<Payment>().Property(p => p.PaymentCode).HasDefaultValueSql("FORMAT((NEXT VALUE FOR PaymentCodes), 'PA#')");
+        builder.Entity<Order>(b => {
+            b.Property(x => x.OrderCode).HasDefaultValueSql("FORMAT((NEXT VALUE FOR OrderCodes), 'DH#')");
+        });
+        builder.Entity<Customer>(b =>
+        {
+            b.Property(x => x.CustomerCode).HasDefaultValueSql("FORMAT((NEXT VALUE FOR CustomerCodes), 'KH#')");
+        });
+
+        builder.Entity<PartyIdentificationType>(x => {
+            x.HasOne(x => x.PartyIdentification).WithOne(x => x.PartyIdentificationType).OnDelete(DeleteBehavior.NoAction);                                                         
+        });
 
         builder.Entity<PartyRoleAssignment>()
-        .HasOne<CustomerBase>()
+        .HasOne<Customer>()
         .WithOne(ad => ad.PartyRoleAssignment);
 
         builder.Entity<Team>(p =>
@@ -193,7 +215,7 @@ public class IdentityDbContext : AbpZeroDbContext<Tenant, Role, User, IdentityDb
 
         builder.Entity<Branch>(p =>
         {
-            p.HasOne(x => x.Party).WithOne(x => x.Branch).OnDelete(DeleteBehavior.NoAction);
+
             p.HasOne(x => x.PartyRoleAssignment).WithOne().OnDelete(DeleteBehavior.NoAction);
         });
 

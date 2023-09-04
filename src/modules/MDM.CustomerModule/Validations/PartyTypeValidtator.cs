@@ -3,6 +3,7 @@ using Abp.Domain.Repositories;
 using FluentValidation;
 using MDM.Common;
 using MDM.CustomerModule.Entity.PartyModel;
+using MDM.CustomerModule.Entity.Person;
 using MDM.CustomerModule.Models;
 using System.Xml.Linq;
 
@@ -11,6 +12,8 @@ public class PartyTypeValidtator : AbstractValidator<CreatePartyTypeModel>
 {
     public PartyTypeValidtator()
     {
+        RuleFor(p => p.Name).Must((name) => name != PartyTypeConsts.PersonKey && name != PartyTypeConsts.OrganizationKey).WithMessage("ERR_PARTYTYPE_NAME_NOT_ALLOW");
+
         RuleFor(p => p.Name).NotNull().NotEmpty().WithMessage("ERR_PARTY_NAME_NOT_NULL").MustAsync(async (name, cancellation) =>
         {
             using (var ioc = IocManager.Instance.ResolveAsDisposable<IRepository<PartyType, Guid>>())

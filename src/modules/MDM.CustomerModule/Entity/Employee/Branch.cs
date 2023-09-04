@@ -16,9 +16,6 @@ namespace MDM.CustomerModule.Entity.Employee
         public Guid? PartyRoleAssignmentId { get; set; }
 
         public bool AnonymousFlag { get; set; }
- 
-        [ForeignKey(nameof(PartyId))]
-        public PartiesBase Party { get; set; }
 
         [ForeignKey(nameof(PartyRoleAssignmentId))]
         public PartyRoleAssignment PartyRoleAssignment { get; set; }

@@ -1,11 +1,13 @@
-﻿using Abp.AutoMapper;
+﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using Abp.Domain.Entities.Auditing;
 using MDM.CustomerModule.Entity.PartyModel;
 using MDM.ModuleBase;
 
 namespace MDM.CustomerModule.Models;
 
 [AutoMap(typeof(PartiesBase))]
-public class PartyModel
+public class PartyModel : EntityDto<Guid>, IHasCreationTime
 {
     /// <summary>
     /// Tên party (thực thể/ đối tượng).

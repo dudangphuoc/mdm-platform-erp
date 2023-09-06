@@ -18,13 +18,14 @@ public class CustomerStoreBase : ICustomerStoreBase, ITransientDependency
     protected IRepository<PartiesBase, Guid> PartiesRepository;
     protected IRepository<PersonBase, Guid> PersonRepository;
     protected IRepository<CustomerType, Guid> CustomerTypeRepository;
+    protected IRepository<Organization, Guid> OrganizationRepository;
 
-
-    public CustomerStoreBase(IRepository<CustomerBase, Guid> repository, IRepository<PersonBase, Guid> personRepository, IRepository<CustomerType, Guid> customerTypeRepository)
+    public CustomerStoreBase(IRepository<CustomerBase, Guid> repository, IRepository<PersonBase, Guid> personRepository, IRepository<CustomerType, Guid> customerTypeRepository, IRepository<Organization, Guid> organizationRepository)
     {
         CustomerRepository = repository;
         PersonRepository = personRepository;
         CustomerTypeRepository = customerTypeRepository;
+        OrganizationRepository = organizationRepository;
     }
 
     public virtual IQueryable<PartiesBase> GetAllCustomer(GetAllCustomerModel input)
@@ -39,11 +40,16 @@ public class CustomerStoreBase : ICustomerStoreBase, ITransientDependency
 
         if (!string.IsNullOrEmpty(input.Name))
         {
+            var organizationQuery = OrganizationRepository.GetAll().Where(p => p.OrganizationName.Contains(input.Name.ToUpper().Trim()));
             var personQuery = PersonRepository.GetAll().Where(x => x.Name.Contains(input.Name.ToUpper().Trim()));
-            var resultQuery = from parties in partiesQuery
-                              join tPerson in personQuery on parties.Id equals tPerson.Id into t2
-                              from person in t2.DefaultIfEmpty()
-                              select parties;
+            var resultQuery =  from parties in partiesQuery
+                                join org in organizationQuery on parties.Id equals org.Id into t1
+                                from organiztion in t1.DefaultIfEmpty()
+                                join per in personQuery on parties.Id equals per.Id into t2
+                                from person in t2.DefaultIfEmpty()
+                                where (person.Name.Contains(input.Name.ToUpper().Trim()) || organiztion.OrganizationName.Contains(input.Name.ToUpper().Trim()))
+                                && parties.PartyRoleAssignments.Count > 0
+                                select parties;
 
             return resultQuery;
         }

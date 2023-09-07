@@ -3,11 +3,17 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using Abp.UI;
+using FluentValidation;
+using MDM.Common.Validations;
 using MDM.CustomerModule.Entity.Employee;
 using MDM.CustomerModule.Entity.PartyContact;
 using MDM.CustomerModule.Entity.PartyModel;
 using MDM.CustomerModule.Entity.Person;
+using MDM.CustomerModule.EntityTypeService;
 using MDM.CustomerModule.Models;
+using Microsoft.EntityFrameworkCore;
+using Z.EntityFramework.Plus;
 
 namespace Identity.Application.EmployeeApp;
 public class DeleteEmployeeModel : EntityDto<Guid>
@@ -63,26 +69,37 @@ public class GetAllEmployeeModel : PagedAndSortedResultRequestDto
 //    public string? TaxCode { get; set; }
 //}
 
+public class EmployeeValidator : AbstractValidator<CreatePartyModel>
+{
+    public EmployeeValidator()
+    {
+        RuleFor(p => p.Name).NotNull().NotEmpty().WithMessage("ERR_PARTY_NAME_NOT_NULL");
+        RuleFor(p => p.EmployeeTypeId).NotNull().NotEmpty().WithMessage("ERR_EMPLOYEE_TYPE_NOT_NULL");
+    }
+}
 
-public interface IEmployeeService : IAsyncCrudAppService<PartyModel, Guid, GetAllEmployeeModel, CreateEmployeeModel, UpdateEmployeeModel, GetEmployeeModel, DeleteEmployeeModel>
+public interface IEmployeeService : IAsyncCrudAppService<PartyModel, Guid, GetAllEmployeeModel, CreatePartyModel, UpdateEmployeeModel, GetEmployeeModel, DeleteEmployeeModel>
 {
 
 }
 
-public class EmployeeService : AsyncCrudAppService<PartiesBase, PartyModel, Guid, GetAllEmployeeModel, CreateEmployeeModel, UpdateEmployeeModel, GetEmployeeModel, DeleteEmployeeModel>, IEmployeeService
+public class EmployeeService : AsyncCrudAppService<PartiesBase, PartyModel, Guid, GetAllEmployeeModel, CreatePartyModel, UpdateEmployeeModel, GetEmployeeModel, DeleteEmployeeModel>, IEmployeeService
 {
-
-    protected IRepository<EmployeeBase, Guid> EmployeeBaseRepository;
+    protected IEmployeeTypeModel EmployeeTypeModel;
+    protected IRepository<EmployeeBase, Guid> EmployeeRepository;
+    protected IRepository<EmployeeType, Guid> EmployeeTypeRepository;
     protected IRepository<PersonBase, Guid> PersonRepository;
     protected IRepository<Organization, Guid> OrganizationRepository;
 
 
 
-    public EmployeeService(IRepository<PartiesBase, Guid> repository, IRepository<EmployeeBase, Guid> employeeBaseRepository, IRepository<PersonBase, Guid> personRepository, IRepository<Organization, Guid> organizationRepository) : base(repository)
+    public EmployeeService(IRepository<PartiesBase, Guid> repository, IRepository<EmployeeBase, Guid> employeeBaseRepository, IRepository<PersonBase, Guid> personRepository, IRepository<Organization, Guid> organizationRepository, IRepository<EmployeeType, Guid> employeeTypeRepository, IEmployeeTypeModel employeeTypeModel) : base(repository)
     {
-        EmployeeBaseRepository = employeeBaseRepository;
+        EmployeeRepository = employeeBaseRepository;
         PersonRepository = personRepository;
         OrganizationRepository = organizationRepository;
+        EmployeeTypeRepository = employeeTypeRepository;
+        EmployeeTypeModel = employeeTypeModel;
     }
 
     protected override IQueryable<PartiesBase> CreateFilteredQuery(GetAllEmployeeModel input)
@@ -112,6 +129,59 @@ public class EmployeeService : AsyncCrudAppService<PartiesBase, PartyModel, Guid
         }
 
         return partiesQuery;
+    }
+
+    public override async Task<PagedResultDto<PartyModel>> GetAllAsync(GetAllEmployeeModel input)
+    {
+        var query = CreateFilteredQuery(input);
+        var totalCount = await EmployeeRepository.CountAsync();
+        query = ApplySorting(query, input);
+        query = ApplyPaging(query, input);
+
+        var entities = await AsyncQueryableExecuter.ToListAsync(query);
+
+        return new PagedResultDto<PartyModel>(
+            totalCount,
+            entities.Select(MapToEntityDto).ToList()
+        );
+    }
+
+    protected override async Task<PartiesBase> GetEntityByIdAsync(Guid id)
+    {
+        var partiesQuery = Repository.GetAllIncluding(
+            x => x.PartyType,
+            x => x.PartyIdentification,
+            x => x.Employee.EmployeeType,
+            x => x.Employee.PartyRoleAssignment.PartyRoleType,
+            x => x.Employee.CustomerDynamicAtrributeValues).Where(x => x.Employee != null);
+        var party = partiesQuery.FirstOrDefault(x => x.Id == id && x.IsActive == true);
+        if (party == null)
+            throw new UserFriendlyException("ERR_PARTY_NOT_FOUND");
+      
+        return party;
+    }
+
+    public void CheckPhone(CreatePartyModel input)
+    {
+        if (input.EmployeeTypeId == EmployeeTypeModel.AgencyEmployee)
+        {
+            if (string.IsNullOrEmpty(input.TelePhoneNumber))
+                throw new UserFriendlyException("ERR_PHONENUMBER_NOT_NULL");
+            else if (!PhoneNumberValidation.IsPhoneNbr(input.TelePhoneNumber))
+                throw new UserFriendlyException("ERR_PHONENUMBER_INCORECT_FORMAT");
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(input.EmailAddress))
+                throw new UserFriendlyException("ERR_EMAIL_NOT_NULL");
+        }
+    }
+
+    public override Task<PartyModel> CreateAsync(CreatePartyModel input)
+    {
+       
+        CheckPhone(input);
+        return base.CreateAsync(input);
     }
 
 }
